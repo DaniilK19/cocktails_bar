@@ -3,9 +3,8 @@
 import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { gsap, ScrollTrigger } from "@/lib/gsap"
-import { LiquidBlob } from "@/components/ui/liquid-blob"
 import { ParallaxBackground } from "@/components/ui/parallax-background"
-import { ChevronDown, Sparkles } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null)
@@ -66,15 +65,12 @@ export function Hero() {
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       <ParallaxBackground 
-        imageSrc="/images/hero.png" 
+        imageSrc="/images/optimized/hero.webp" 
         speed={0.3} 
         opacity={0.45} 
         blur={0.2} 
       />
       
-      <LiquidBlob className="w-full h-full top-0 left-0" variant="organic" />
-      <LiquidBlob className="w-2/3 h-2/3 -top-32 -right-32" color="cocktail-blue" variant="geometric" />
-      <LiquidBlob className="w-1/2 h-1/2 -bottom-20 -left-20" color="cocktail-purple" variant="fluid" />
 
       <div className="absolute inset-0 bg-gradient-to-b from-aristocrat-void/30 via-transparent to-aristocrat-void/50" />
 
@@ -105,7 +101,7 @@ export function Hero() {
           ref={subtitleRef}
           className="text-lg md:text-xl aristocrat-text mb-20 max-w-2xl mx-auto font-extralight leading-loose sans"
         >
-          L'art de la mixologie française
+          L&apos;art de la mixologie française
           <br />
           <span className="aristocrat-subtext mt-6 block">Une expérience raffinée</span>
         </p>

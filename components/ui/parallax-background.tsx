@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import Image from "next/image"
+import { OptimizedImage } from "./optimized-image"
 
 interface ParallaxBackgroundProps {
   imageSrc: string
@@ -91,14 +91,14 @@ export function ParallaxBackground({
           filter: `blur(${blur}px)`,
         }}
       >
-        <Image
+        <OptimizedImage
           src={imageSrc}
           alt="Background"
           fill
           className="object-cover object-center"
-          priority={false}
+          priority={imageSrc.includes('hero')}
           quality={85}
-          sizes="100vw"
+          sizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1200px"
         />
         {!hideGradient && (
           <div className="absolute inset-0 bg-gradient-to-b from-aristocrat-void/80 via-aristocrat-void/60 to-aristocrat-void/90" />

@@ -125,7 +125,7 @@ export function About() {
           style={{
             opacity: 0.25,
             filter: 'blur(1.2px)',
-            backgroundImage: 'url(/images/our_history.jpg)',
+            backgroundImage: 'url(/images/optimized/our_history.webp)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
@@ -155,7 +155,7 @@ export function About() {
             >
               <span className="text-aristocrat-white">UNE MAISON</span>
               <br />
-              <span className="text-aristocrat-cream font-extralight">D'EXCEPTION</span>
+              <span className="text-aristocrat-cream font-extralight">D&apos;EXCEPTION</span>
             </motion.h2>
 
             <div className="w-16 h-px bg-aristocrat-charcoal mb-12"></div>
@@ -168,16 +168,16 @@ export function About() {
               viewport={{ once: true }}
             >
               <p>
-                Depuis notre fondation, nous perpétuons l'art ancestral de la mixologie 
+                Depuis notre fondation, nous perpétuons l&apos;art ancestral de la mixologie 
                 française, alliant techniques traditionnelles et vision contemporaine.
               </p>
               <p>
-                Chaque création naît d'une recherche minutieuse, d'une sélection 
-                rigoureuse des meilleurs ingrédients et d'un savoir-faire transmis 
+                Chaque création naît d&apos;une recherche minutieuse, d&apos;une sélection 
+                rigoureuse des meilleurs ingrédients et d&apos;un savoir-faire transmis 
                 de génération en génération.
               </p>
               <p>
-                Notre atelier parisien cultive l'excellence, créant des expériences 
+                Notre atelier parisien cultive l&apos;excellence, créant des expériences 
                 sensorielles uniques pour une clientèle exigeante.
               </p>
             </motion.div>

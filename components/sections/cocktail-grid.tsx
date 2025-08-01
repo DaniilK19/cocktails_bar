@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { gsap } from "@/lib/gsap"
 import { cocktails } from "@/data/cocktails"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import Image from "next/image"
+import { OptimizedImage } from "@/components/ui/optimized-image"
 
 export function CocktailGrid() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -93,7 +93,7 @@ export function CocktailGrid() {
         {/* Gallery Header */}
         <div ref={headerRef} className="text-center mb-16 lg:mb-24">
           <div className="aristocrat-subtext mb-6 lg:mb-8 text-aristocrat-cream/60 text-sm lg:text-base">
-            — Galerie d'Art Liquide —
+            — Galerie d&apos;Art Liquide —
           </div>
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-light mb-8 lg:mb-12 serif tracking-tight">
             <span className="text-aristocrat-white">COLLECTION</span>
@@ -156,12 +156,13 @@ export function CocktailGrid() {
                         
                         {/* The Artwork */}
                         <div className="relative w-full h-full overflow-hidden bg-aristocrat-void/10">
-                          <Image
+                          <OptimizedImage
                             src={cocktail.image}
                             alt={cocktail.name}
                             fill
                             className="object-cover"
                             quality={90}
+                            sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 480px"
                           />
                           
                           {/* Reflection Effect */}
@@ -267,8 +268,8 @@ export function CocktailGrid() {
                 Collection Privée — Maison Cocktail — Paris
               </div>
               <p className="text-sm text-aristocrat-cream/60 font-extralight leading-relaxed">
-                Parcourez notre collection exclusive d'art liquide, où chaque création<br className="hidden lg:block" />
-                représente l'essence même du raffinement français
+                Parcourez notre collection exclusive d&apos;art liquide, où chaque création<br className="hidden lg:block" />
+                représente l&apos;essence même du raffinement français
               </p>
             </div>
           </div>

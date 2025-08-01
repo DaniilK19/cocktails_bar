@@ -42,7 +42,7 @@ export function Footer() {
                 </div>
               </div>
               <p className="aristocrat-text font-extralight leading-loose mb-12 max-w-sm">
-                L'excellence française au service de l'art cocktail. 
+                L&apos;excellence française au service de l&apos;art cocktail. 
                 Une expérience sensorielle unique, cultivée dans le respect de la tradition.
               </p>
             </motion.div>

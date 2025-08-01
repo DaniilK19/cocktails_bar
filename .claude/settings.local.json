@@ -13,7 +13,11 @@
       "Bash(mkdir:*)",
       "Bash(npm run build:*)",
       "Bash(copy:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(find:*)",
+      "Bash(squoosh-cli:*)",
+      "Bash(node:*)",
+      "Bash(/dev/null)"
     ],
     "deny": []
   }

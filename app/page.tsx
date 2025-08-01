@@ -1,7 +1,6 @@
 import { Hero } from "@/components/sections/hero"
 import { CocktailGrid } from "@/components/sections/cocktail-grid"
 import { About } from "@/components/sections/about"
-import { ParallaxBackground } from "@/components/ui/parallax-background"
 
 export default function Home() {
   return (
