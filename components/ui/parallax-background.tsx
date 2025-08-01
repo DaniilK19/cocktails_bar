@@ -1,7 +1,9 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useCallback } from "react"
 import { OptimizedImage } from "./optimized-image"
+import { useThrottledScroll } from "@/hooks/useThrottledScroll"
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver"
 
 interface ParallaxBackgroundProps {
   imageSrc: string
@@ -23,66 +25,93 @@ export function ParallaxBackground({
   animationType = 'vertical'
 }: ParallaxBackgroundProps) {
   const parallaxRef = useRef<HTMLDivElement>(null)
+  const { elementRef: containerRef, isIntersecting } = useIntersectionObserver({
+    threshold: 0,
+    rootMargin: '50px 0px 50px 0px' // Start animation 50px before entering viewport
+  })
 
+  // Cache element dimensions to avoid repeated getBoundingClientRect calls
+  const elementDimensions = useRef<{
+    top: number
+    height: number
+    windowHeight: number
+  } | null>(null)
+
+  // Update cached dimensions when element size might change
   useEffect(() => {
-    const handleScroll = () => {
-      if (!parallaxRef.current) return
+    const updateDimensions = () => {
+      if (!containerRef.current) return
       
-      const scrolled = window.pageYOffset
-      const parallax = parallaxRef.current
-      const rect = parallax.getBoundingClientRect()
-      const elementTop = rect.top + scrolled
-      const elementHeight = rect.height
-      const windowHeight = window.innerHeight
-      
-      // Calculate scroll progress for this element
-      const scrollProgress = Math.max(0, Math.min(1, 
-        (scrolled + windowHeight - elementTop) / (windowHeight + elementHeight)
-      ))
-      
-      let transform = ''
-      
-      switch (animationType) {
-        case 'vertical':
-          const yPos = -(scrolled * speed)
-          transform = `translateY(${yPos}px)`
-          break
-        case 'horizontal':
-          const xPos = scrolled * speed * 0.5
-          transform = `translateX(${xPos}px) translateY(${-(scrolled * speed * 0.3)}px)`
-          break
-        case 'zoom':
-          const scale = 1 + (scrollProgress * speed * 0.2)
-          transform = `scale(${scale}) translateY(${-(scrolled * speed * 0.5)}px)`
-          break
-        case 'rotate':
-          const rotation = scrollProgress * speed * 30
-          transform = `rotate(${rotation}deg) translateY(${-(scrolled * speed * 0.3)}px)`
-          break
-        case 'wave':
-          const wave = Math.sin(scrollProgress * Math.PI * 2) * 20 * speed
-          transform = `translateY(${-(scrolled * speed) + wave}px) translateX(${wave * 0.5}px)`
-          break
-        case 'elegant':
-          // Elegant floating effect with subtle movement only
-          const elegantY = -(scrolled * speed * 0.8)
-          const elegantX = Math.sin(scrollProgress * Math.PI * 0.5) * 10 * speed
-          transform = `translateY(${elegantY}px) translateX(${elegantX}px)`
-          break
-        default:
-          const defaultY = -(scrolled * speed)
-          transform = `translateY(${defaultY}px)`
+      const rect = containerRef.current.getBoundingClientRect()
+      elementDimensions.current = {
+        top: rect.top + window.pageYOffset,
+        height: rect.height,
+        windowHeight: window.innerHeight
       }
-      
-      parallax.style.transform = transform
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    updateDimensions()
+    
+    const resizeObserver = new ResizeObserver(updateDimensions)
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current)
+    }
+
+    window.addEventListener('resize', updateDimensions)
+    
+    return () => {
+      resizeObserver.disconnect()
+      window.removeEventListener('resize', updateDimensions)
+    }
+  }, [containerRef])
+
+  // Memoize transform calculation function
+  const calculateTransform = useCallback((scrolled: number): string => {
+    if (!elementDimensions.current) return ''
+
+    const { top, height, windowHeight } = elementDimensions.current
+    const scrollProgress = Math.max(0, Math.min(1, 
+      (scrolled + windowHeight - top) / (windowHeight + height)
+    ))
+    
+    switch (animationType) {
+      case 'vertical':
+        return `translateY(${-(scrolled * speed)}px)`
+      case 'horizontal':
+        const xPos = scrolled * speed * 0.5
+        return `translateX(${xPos}px) translateY(${-(scrolled * speed * 0.3)}px)`
+      case 'zoom':
+        const scale = 1 + (scrollProgress * speed * 0.2)
+        return `scale(${scale}) translateY(${-(scrolled * speed * 0.5)}px)`
+      case 'rotate':
+        const rotation = scrollProgress * speed * 30
+        return `rotate(${rotation}deg) translateY(${-(scrolled * speed * 0.3)}px)`
+      case 'wave':
+        const wave = Math.sin(scrollProgress * Math.PI * 2) * 20 * speed
+        return `translateY(${-(scrolled * speed) + wave}px) translateX(${wave * 0.5}px)`
+      case 'elegant':
+        const elegantY = -(scrolled * speed * 0.8)
+        const elegantX = Math.sin(scrollProgress * Math.PI * 0.5) * 10 * speed
+        return `translateY(${elegantY}px) translateX(${elegantX}px)`
+      default:
+        return `translateY(${-(scrolled * speed)}px)`
+    }
   }, [speed, animationType])
 
+  // Optimized scroll handler with throttling and RAF
+  const handleScroll = useCallback((scrollY: number) => {
+    // Only animate if element is visible or near viewport
+    if (!isIntersecting || !parallaxRef.current) return
+    
+    const transform = calculateTransform(scrollY)
+    parallaxRef.current.style.transform = transform
+  }, [isIntersecting, calculateTransform])
+
+  // Use throttled scroll hook (60fps throttling)
+  useThrottledScroll(handleScroll, 16)
+
   return (
-    <div className={`absolute inset-0 overflow-hidden ${className}`}>
+    <div ref={containerRef} className={`absolute inset-0 overflow-hidden ${className}`}>
       <div
         ref={parallaxRef}
         className="absolute inset-0 w-full h-[140%] -top-[20%]"

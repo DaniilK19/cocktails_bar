@@ -39,20 +39,18 @@ export function Hero() {
         stagger: 0.2,
       })
 
+      // More performant ScrollTrigger with direct transforms
       ScrollTrigger.create({
         trigger: heroRef.current,
         start: "top top",
         end: "bottom top",
-        scrub: true,
-        onUpdate: (self) => {
-          const progress = self.progress
-          gsap.to(heroRef.current, {
-            y: progress * 100,
-            opacity: 1 - progress * 0.5,
-            ease: "none",
-            duration: 0,
-          })
-        },
+        scrub: 1, // Add smoothing for better performance
+        animation: gsap.to(heroRef.current, {
+          y: 100,
+          opacity: 0.5,
+          ease: "none",
+        }),
+        invalidateOnRefresh: true, // Recalculate on resize
       })
     }, heroRef)
 
