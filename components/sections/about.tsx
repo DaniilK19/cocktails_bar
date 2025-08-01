@@ -217,7 +217,7 @@ export function About() {
                         <div className={`text-3xl font-light serif transition-colors duration-300 ${
                           isActive || isHovered 
                             ? 'text-aristocrat-cream' 
-                            : 'text-aristocrat-charcoal'
+                            : 'text-aristocrat-cream/80'
                         }`}>
                           {principle.number}
                         </div>
