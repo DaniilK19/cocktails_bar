@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 const loadGSAP = () => import("@/lib/gsap").then(mod => ({ gsap: mod.gsap, ScrollTrigger: mod.ScrollTrigger }))
 import { ParallaxBackground } from "@/components/ui/parallax-background"
 import { ChevronDown } from "lucide-react"
+import { seoContent } from "@/data/seo-content"
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null)
@@ -84,7 +85,7 @@ export function Hero() {
           className="mb-16 hero-cta"
         >
           <p className="aristocrat-subtext text-center">
-            <time dateTime="2024">Est. MMXXIV</time> — Artisanal Spirits
+            <time dateTime="1924">Est. MCMXXIV</time> — {seoContent.hero.tagline}
           </p>
         </motion.div>
 
@@ -105,7 +106,7 @@ export function Hero() {
         >
           L&apos;art de la mixologie française
           <br />
-          <span className="aristocrat-subtext mt-6 block">Une expérience raffinée</span>
+          <span className="aristocrat-subtext mt-6 block">{seoContent.hero.subTagline}</span>
         </p>
 
         <nav className="flex flex-col sm:flex-row gap-12 justify-center items-center hero-cta" aria-label="Actions principales">
@@ -116,7 +117,7 @@ export function Hero() {
             aria-label="Voir notre collection de cocktails"
             title="Découvrir notre collection exclusive de cocktails artisanaux"
           >
-            Découvrir la Collection
+            {seoContent.hero.cta.primary}
           </motion.a>
           <motion.a
             href="#contact"
@@ -125,7 +126,7 @@ export function Hero() {
             aria-label="Réserver une dégustation de cocktails"
             title="Réserver une expérience de dégustation personnalisée"
           >
-            Réserver une Dégustation
+            {seoContent.hero.cta.secondary}
           </motion.a>
         </nav>
       </div>

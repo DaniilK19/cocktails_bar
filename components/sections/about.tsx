@@ -5,39 +5,41 @@ import { motion, AnimatePresence } from "framer-motion"
 // Lazy load GSAP to reduce initial bundle size
 const loadGSAP = () => import("@/lib/gsap").then(mod => mod.gsap)
 import { ChevronRight, Clock, Award, Sparkles, Crown } from "lucide-react"
+import { seoContent } from "@/data/seo-content"
+import { InternalLink } from "@/components/ui/internal-link"
 
 const principles = [
   { 
     number: "01", 
-    title: "Tradition", 
-    description: "Héritage des maîtres verriers",
+    title: seoContent.about.values.heritage.title, 
+    description: "Héritage des maîtres mixologues",
     icon: Clock,
-    details: "Depuis 1924, nous préservons les techniques ancestrales de distillation française, transmises de maître à apprenti dans le respect des traditions séculaires.",
-    stats: "100 ans d'héritage"
+    details: seoContent.about.values.heritage.description,
+    stats: "100 ans d'excellence"
   },
   { 
     number: "02", 
-    title: "Innovation", 
+    title: seoContent.about.values.innovation.title, 
     description: "Créativité contemporaine",
     icon: Sparkles,
-    details: "Nos laboratoires de recherche explorent constamment de nouvelles saveurs, mélangeant science moderne et savoir-faire traditionnel pour créer l'extraordinaire.",
-    stats: "50+ créations uniques"
+    details: seoContent.about.values.innovation.description,
+    stats: "50+ créations exclusives"
   },
   { 
     number: "03", 
-    title: "Excellence", 
+    title: seoContent.about.values.craftsmanship.title, 
     description: "Perfection dans chaque détail",
     icon: Award,
-    details: "Chaque bouteille est le résultat d'un processus méticuleux de sélection, de contrôle qualité et de perfectionnement, garantissant une expérience incomparable.",
-    stats: "99.9% de satisfaction"
+    details: seoContent.about.values.craftsmanship.description,
+    stats: "Spiritueux d'exception"
   },
   { 
     number: "04", 
-    title: "Raffinement", 
+    title: seoContent.about.values.experience.title, 
     description: "L'élégance française",
     icon: Crown,
-    details: "L'art de vivre à la française s'exprime dans chaque création, alliant sophistication, élégance et cette touche d'exception qui fait notre réputation mondiale.",
-    stats: "Présent dans 25 pays"
+    details: seoContent.about.values.experience.description,
+    stats: "Place Vendôme Paris"
   },
 ]
 
@@ -159,9 +161,9 @@ export function About() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
             >
-              <span className="text-aristocrat-white">UNE MAISON</span>
+              <span className="text-aristocrat-white">{seoContent.about.title.split(' ').slice(0, 2).join(' ')}</span>
               <br />
-              <span className="text-aristocrat-cream font-extralight">D&apos;EXCEPTION</span>
+              <span className="text-aristocrat-cream font-extralight">{seoContent.about.title.split(' ').slice(2).join(' ')}</span>
             </motion.h2>
 
             <hr className="w-16 h-px bg-aristocrat-charcoal mb-12 border-0" aria-hidden="true" />
@@ -174,8 +176,7 @@ export function About() {
               viewport={{ once: true }}
             >
               <p>
-                Depuis notre fondation, nous perpétuons l&apos;art ancestral de la mixologie 
-                française, alliant techniques traditionnelles et vision contemporaine.
+                {seoContent.about.intro}
               </p>
               <p>
                 Chaque création naît d&apos;une recherche minutieuse, d&apos;une sélection 
@@ -184,8 +185,34 @@ export function About() {
               </p>
               <p>
                 Notre atelier parisien cultive l&apos;excellence, créant des expériences 
-                sensorielles uniques pour une clientèle exigeante.
+                sensorielles uniques pour une clientèle exigeante à la recherche 
+                de l&apos;authenticité et du raffinement.
               </p>
+              
+              {/* Internal linking CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="mt-12 flex flex-col sm:flex-row gap-6"
+              >
+                <InternalLink 
+                  href="#cocktails" 
+                  variant="primary"
+                  showArrow
+                  title="Découvrir notre collection exclusive de cocktails premium"
+                >
+                  Découvrir nos Créations Signature
+                </InternalLink>
+                <InternalLink 
+                  href="#contact" 
+                  variant="secondary"
+                  title="Réserver une dégustation privée de cocktails artisanaux"
+                >
+                  Réserver une Dégustation Privée
+                </InternalLink>
+              </motion.div>
             </motion.div>
           </article>
 

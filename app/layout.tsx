@@ -68,6 +68,11 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning>
       <head>
         <StructuredData />
+        {/* Preload critical resources for Core Web Vitals */}
+        <link rel="preload" href="/images/optimized/hero.webp" as="image" type="image/webp" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="//maisoncocktail.fr" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
