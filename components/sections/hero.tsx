@@ -64,9 +64,9 @@ export function Hero() {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <LiquidBlob className="w-full h-full top-0 left-0" />
-      <LiquidBlob className="w-3/4 h-3/4 -top-20 -right-20" color="cocktail-blue" />
-      <LiquidBlob className="w-1/2 h-1/2 -bottom-10 -left-10" color="cocktail-purple" />
+      <LiquidBlob className="w-full h-full top-0 left-0" variant="organic" />
+      <LiquidBlob className="w-2/3 h-2/3 -top-32 -right-32" color="cocktail-blue" variant="geometric" />
+      <LiquidBlob className="w-1/2 h-1/2 -bottom-20 -left-20" color="cocktail-purple" variant="fluid" />
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
 
@@ -75,10 +75,12 @@ export function Hero() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 hero-cta"
+          className="inline-flex items-center gap-3 px-6 py-3 rounded-full backdrop-blur-xl bg-gradient-to-r from-white/20 via-white/10 to-white/5 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgba(251,146,60,0.3)] hover:border-white/50 transition-all duration-300 mb-8 hero-cta group"
         >
-          <Sparkles className="w-4 h-4 text-cocktail-yellow" />
-          <span className="text-sm font-medium">Premium Cocktail Experience</span>
+          <div className="p-1 rounded-full bg-gradient-to-r from-cocktail-yellow to-cocktail-orange">
+            <Sparkles className="w-3 h-3 text-white group-hover:rotate-12 transition-transform duration-300" />
+          </div>
+          <span className="text-sm font-semibold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">Premium Cocktail Experience</span>
         </motion.div>
 
         <h1
