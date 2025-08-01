@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { LenisProvider } from "@/components/providers/lenis-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { StructuredData } from "@/components/seo/structured-data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,8 +18,45 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mixology Bar - Premium Cocktails",
-  description: "Experience the art of mixology with our premium cocktail collection",
+  metadataBase: new URL('https://maisoncocktail.fr'),
+  title: "Maison Cocktail | Art de la Mixologie Française | Paris",
+  description: "Découvrez l'art de la mixologie française avec notre collection exclusive de cocktails artisanaux. Maison Cocktail Paris - Une expérience raffinée depuis 1924.",
+  keywords: "cocktail Paris, mixologie française, bar cocktail, spiritueux artisanaux, cocktails premium, dégustation Paris, Place Vendôme",
+  authors: [{ name: "Maison Cocktail" }],
+  creator: "Maison Cocktail",
+  publisher: "Maison Cocktail",
+  robots: "index, follow",
+  alternates: {
+    canonical: "https://maisoncocktail.fr"
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: "https://maisoncocktail.fr",
+    siteName: "Maison Cocktail",
+    title: "Maison Cocktail | Art de la Mixologie Française | Paris",
+    description: "Découvrez l'art de la mixologie française avec notre collection exclusive de cocktails artisanaux. Une expérience raffinée depuis 1924.",
+    images: [
+      {
+        url: "/images/optimized/hero.webp",
+        width: 1200,
+        height: 630,
+        alt: "Maison Cocktail - Art de la mixologie française"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@MaisonCocktail",
+    creator: "@MaisonCocktail",
+    title: "Maison Cocktail | Art de la Mixologie Française",
+    description: "Découvrez l'art de la mixologie française avec notre collection exclusive de cocktails artisanaux.",
+    images: ["/images/optimized/hero.webp"]
+  },
+  verification: {
+    google: "your-google-site-verification-code",
+    yandex: "your-yandex-verification-code"
+  }
 };
 
 export default function RootLayout({
@@ -27,7 +65,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="fr" suppressHydrationWarning>
+      <head>
+        <StructuredData />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
