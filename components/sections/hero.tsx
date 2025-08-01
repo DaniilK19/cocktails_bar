@@ -7,11 +7,13 @@ const loadGSAP = () => import("@/lib/gsap").then(mod => ({ gsap: mod.gsap, Scrol
 import { ParallaxBackground } from "@/components/ui/parallax-background"
 import { ChevronDown } from "lucide-react"
 import { seoContent } from "@/data/seo-content"
+import { useAnalytics } from "@/components/analytics/google-analytics"
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
   const subtitleRef = useRef<HTMLParagraphElement>(null)
+  const { trackReservationAttempt, trackSectionView } = useAnalytics()
 
   useEffect(() => {
     if (!heroRef.current) return
@@ -116,6 +118,7 @@ export function Hero() {
             className="aristocrat-button px-8 py-4"
             aria-label="Voir notre collection de cocktails"
             title="Découvrir notre collection exclusive de cocktails artisanaux"
+            onClick={() => trackSectionView('cocktails_from_hero')}
           >
             {seoContent.hero.cta.primary}
           </motion.a>
@@ -125,6 +128,7 @@ export function Hero() {
             className="aristocrat-link px-8 py-4"
             aria-label="Réserver une dégustation de cocktails"
             title="Réserver une expérience de dégustation personnalisée"
+            onClick={() => trackReservationAttempt('hero')}
           >
             {seoContent.hero.cta.secondary}
           </motion.a>

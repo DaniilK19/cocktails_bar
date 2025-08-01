@@ -6,6 +6,9 @@ import { LenisProvider } from "@/components/providers/lenis-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { StructuredData } from "@/components/seo/structured-data";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
+import { SearchConsole } from "@/components/seo/search-console";
+import { analyticsConfig } from "@/lib/analytics-config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -68,6 +71,7 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning>
       <head>
         <StructuredData />
+        <SearchConsole verificationCode={analyticsConfig.google.verificationCode} />
         {/* Preload critical resources for Core Web Vitals */}
         <link rel="preload" href="/images/optimized/hero.webp" as="image" type="image/webp" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -77,6 +81,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <GoogleAnalytics measurementId={analyticsConfig.google.measurementId} />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
