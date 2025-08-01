@@ -68,8 +68,8 @@ export function Hero() {
       <ParallaxBackground 
         imageSrc="/images/hero.png" 
         speed={0.3} 
-        opacity={0.3} 
-        blur={0.5} 
+        opacity={0.45} 
+        blur={0.2} 
       />
       
       <LiquidBlob className="w-full h-full top-0 left-0" variant="organic" />
