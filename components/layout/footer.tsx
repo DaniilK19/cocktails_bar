@@ -1,149 +1,138 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Wine, Heart, ExternalLink, Github, Twitter, Instagram } from "lucide-react"
 import Link from "next/link"
 
-const footerLinks = {
-  product: [
+const footerSections = {
+  experience: [
     { name: "Collection", href: "#collection" },
-    { name: "Recipes", href: "#recipes" },
-    { name: "Tutorials", href: "#tutorials" },
-    { name: "Events", href: "#events" },
+    { name: "Dégustations", href: "#tastings" },
+    { name: "Événements", href: "#events" },
+    { name: "Cours", href: "#courses" },
   ],
-  company: [
-    { name: "About", href: "#about" },
-    { name: "Team", href: "#team" },
-    { name: "Careers", href: "#careers" },
-    { name: "Press", href: "#press" },
-  ],
-  social: [
-    { name: "Twitter", icon: Twitter, href: "#" },
-    { name: "Instagram", icon: Instagram, href: "#" },
-    { name: "GitHub", icon: Github, href: "#" },
+  maison: [
+    { name: "Histoire", href: "#about" },
+    { name: "Équipe", href: "#team" },
+    { name: "Philosophie", href: "#philosophy" },
+    { name: "Presse", href: "#press" },
   ],
 }
 
 export function Footer() {
   return (
-    <footer className="relative pt-24 pb-12 overflow-hidden">
-      <div className="absolute inset-0 glass" />
-      
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="flex items-center gap-2 mb-4">
-              <Wine className="w-8 h-8 text-primary" />
-              <span className="text-2xl font-bold gradient-text">Mixology</span>
-            </div>
-            <p className="text-muted-foreground mb-6">
-              Crafting extraordinary cocktail experiences with passion and precision.
-            </p>
-            <div className="flex gap-4">
-              {footerLinks.social.map((social) => (
-                <motion.a
-                  key={social.name}
-                  href={social.href}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-2 rounded-full glass hover:bg-white/20 transition-colors"
-                >
-                  <social.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
+    <footer className="py-24 px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="minimal-border pt-16 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-24">
+            
+            {/* Brand Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="lg:col-span-1"
+            >
+              <div className="mb-8">
+                <h3 className="text-2xl font-light serif tracking-wider text-aristocrat-white mb-2">
+                  MAISON<span className="text-aristocrat-cream font-extralight ml-2">COCKTAIL</span>
+                </h3>
+                <div className="aristocrat-subtext mb-8">
+                  Paris — MMXXIV
+                </div>
+              </div>
+              <p className="aristocrat-text font-extralight leading-loose mb-12 max-w-sm">
+                L'excellence française au service de l'art cocktail. 
+                Une expérience sensorielle unique, cultivée dans le respect de la tradition.
+              </p>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <h3 className="font-semibold text-lg mb-4">Product</h3>
-            <ul className="space-y-3">
-              {footerLinks.product.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 group"
-                  >
-                    {link.name}
-                    <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+            {/* Links Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              className="grid grid-cols-2 gap-12"
+            >
+              <div>
+                <h4 className="aristocrat-subtext mb-8">Expérience</h4>
+                <ul className="space-y-4">
+                  {footerSections.experience.map((link) => (
+                    <li key={link.name}>
+                      <Link
+                        href={link.href}
+                        className="aristocrat-link text-sm"
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="aristocrat-subtext mb-8">La Maison</h4>
+                <ul className="space-y-4">
+                  {footerSections.maison.map((link) => (
+                    <li key={link.name}>
+                      <Link
+                        href={link.href}
+                        className="aristocrat-link text-sm"
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <h3 className="font-semibold text-lg mb-4">Company</h3>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-1 group"
-                  >
-                    {link.name}
-                    <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <h3 className="font-semibold text-lg mb-4">Newsletter</h3>
-            <p className="text-muted-foreground mb-4">
-              Subscribe to get updates on new recipes and exclusive events.
-            </p>
-            <form className="flex gap-2">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="flex-1 px-4 py-2 rounded-full glass focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-2 rounded-full liquid-gradient text-white font-semibold"
-              >
-                Subscribe
-              </motion.button>
-            </form>
-          </motion.div>
+            {/* Contact Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <h4 className="aristocrat-subtext mb-8">Contact</h4>
+              <div className="space-y-6 aristocrat-text font-extralight text-sm">
+                <div>
+                  <p>12 Place Vendôme</p>
+                  <p>75001 Paris, France</p>
+                </div>
+                <div>
+                  <p>+33 1 42 96 10 73</p>
+                  <p>contact@maisoncocktail.fr</p>
+                </div>
+                <div>
+                  <p className="aristocrat-subtext">
+                    Mar — Sam · 18h00 — 02h00
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
+        {/* Copyright */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="pt-8 border-t border-border"
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
         >
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground">
-              © 2025 Mixology. All rights reserved.
-            </p>
-            <p className="text-sm text-muted-foreground flex items-center gap-1">
-              Made with <Heart className="w-3 h-3 text-cocktail-red fill-current" /> by Mixology Team
-            </p>
+          <p className="aristocrat-subtext text-xs">
+            © MMXXIV Maison Cocktail. Tous droits réservés.
+          </p>
+          <div className="flex gap-8">
+            <Link href="#" className="aristocrat-subtext text-xs hover:text-aristocrat-cream transition-colors duration-300">
+              Mentions Légales
+            </Link>
+            <Link href="#" className="aristocrat-subtext text-xs hover:text-aristocrat-cream transition-colors duration-300">
+              Confidentialité
+            </Link>
           </div>
         </motion.div>
       </div>
