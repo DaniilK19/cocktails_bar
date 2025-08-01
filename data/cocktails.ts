@@ -15,7 +15,7 @@ export const cocktails: Cocktail[] = [
     id: "1",
     name: "Sunset Margarita",
     description: "A vibrant twist on the classic margarita with layers of tropical flavors",
-    image: "/images/sunset-margarita.jpg",
+    image: "/images/1.png",
     ingredients: [
       "2 oz Tequila",
       "1 oz Cointreau",
@@ -39,7 +39,7 @@ export const cocktails: Cocktail[] = [
     id: "2",
     name: "Blue Ocean",
     description: "A refreshing blue cocktail that captures the essence of tropical waters",
-    image: "/images/blue-ocean.jpg",
+    image: "/images/2.png",
     ingredients: [
       "2 oz Vodka",
       "1 oz Blue Curacao",
@@ -61,7 +61,7 @@ export const cocktails: Cocktail[] = [
     id: "3",
     name: "Emerald Garden",
     description: "A fresh and herbal cocktail with notes of mint and cucumber",
-    image: "/images/emerald-garden.jpg",
+    image: "/images/3.png",
     ingredients: [
       "2 oz Gin",
       "1 oz Elderflower liqueur",
@@ -85,7 +85,7 @@ export const cocktails: Cocktail[] = [
     id: "4",
     name: "Purple Haze",
     description: "A mysterious and elegant cocktail with floral notes",
-    image: "/images/purple-haze.jpg",
+    image: "/images/4.png",
     ingredients: [
       "2 oz Vodka",
       "1 oz Crème de Violette",
@@ -108,7 +108,7 @@ export const cocktails: Cocktail[] = [
     id: "5",
     name: "Golden Hour",
     description: "A warm and inviting cocktail perfect for sunset moments",
-    image: "/images/golden-hour.jpg",
+    image: "/images/5.png",
     ingredients: [
       "2 oz Bourbon",
       "3/4 oz Honey liqueur",
@@ -131,7 +131,7 @@ export const cocktails: Cocktail[] = [
     id: "6",
     name: "Ruby Romance",
     description: "A passionate blend of berries and champagne",
-    image: "/images/ruby-romance.jpg",
+    image: "/images/6.png",
     ingredients: [
       "1 oz Vodka",
       "1/2 oz Chambord",
@@ -151,5 +151,28 @@ export const cocktails: Cocktail[] = [
     category: "Sparkling",
     alcohol: 12,
     color: "gradient-to-br from-cocktail-red to-red-600"
+  },
+  {
+    id: "7",
+    name: "Midnight Storm",
+    description: "A dark and mysterious cocktail with activated charcoal and citrus",
+    image: "/images/7.png",
+    ingredients: [
+      "2 oz Dark rum",
+      "1/2 oz Activated charcoal syrup",
+      "1 oz Fresh lime juice",
+      "1/2 oz Simple syrup",
+      "2 dashes Orange bitters",
+      "Lime wheel for garnish"
+    ],
+    instructions: [
+      "Add all ingredients to shaker",
+      "Fill with ice and shake vigorously",
+      "Double strain into rocks glass over ice",
+      "Garnish with lime wheel"
+    ],
+    category: "Dark",
+    alcohol: 20,
+    color: "gradient-to-br from-gray-800 to-gray-600"
   }
 ]
