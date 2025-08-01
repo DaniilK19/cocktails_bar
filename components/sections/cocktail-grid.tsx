@@ -1,11 +1,11 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useMemo, useCallback } from "react"
 import { motion } from "framer-motion"
 import { gsap } from "@/lib/gsap"
 import { cocktails } from "@/data/cocktails"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { OptimizedImage } from "@/components/ui/optimized-image"
+import { CocktailItem } from "@/components/ui/cocktail-item"
 
 export function CocktailGrid() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -63,28 +63,53 @@ export function CocktailGrid() {
     return () => clearInterval(interval)
   }, [isAutoPlay])
 
-  const nextSlide = () => {
-    setActiveIndex((prev) => (prev + 1) % cocktails.length)
-    // Restart autoplay after manual navigation
-    setIsAutoPlay(false)
-    setTimeout(() => setIsAutoPlay(true), 5000)
-  }
-
-  const prevSlide = () => {
-    setActiveIndex((prev) => (prev - 1 + cocktails.length) % cocktails.length)
-    // Restart autoplay after manual navigation
-    setIsAutoPlay(false)
-    setTimeout(() => setIsAutoPlay(true), 5000)
-  }
-
-  const goToSlide = (index: number) => {
-    setActiveIndex(index)
-    // Restart autoplay after manual selection
-    setIsAutoPlay(false)
-    setTimeout(() => setIsAutoPlay(true), 5000)
-  }
 
   const activeCocktail = cocktails[activeIndex]
+
+  // Memoize expensive transform calculations
+  const transformsData = useMemo(() => {
+    return cocktails.map((_, index) => {
+      const offset = index - activeIndex
+      const isActive = index === activeIndex
+      const absOffset = Math.abs(offset)
+      
+      // Hide items that are too far away
+      if (absOffset > 2) {
+        return { visible: false }
+      }
+      
+      return {
+        visible: true,
+        offset,
+        isActive,
+        absOffset,
+        translateX: offset * 180,
+        rotateY: offset * -45,
+        scale: isActive ? 1 : 0.7 - (absOffset * 0.1),
+        zIndex: isActive ? 20 : 20 - absOffset,
+        opacity: isActive ? 1 : 0.6 - (absOffset * 0.2),
+      }
+    })
+  }, [activeIndex])
+
+  // Memoize navigation handlers to prevent unnecessary re-renders
+  const handleNextSlide = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % cocktails.length)
+    setIsAutoPlay(false)
+    setTimeout(() => setIsAutoPlay(true), 5000)
+  }, [])
+
+  const handlePrevSlide = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + cocktails.length) % cocktails.length)
+    setIsAutoPlay(false)
+    setTimeout(() => setIsAutoPlay(true), 5000)
+  }, [])
+
+  const handleGoToSlide = useCallback((index: number) => {
+    setActiveIndex(index)
+    setIsAutoPlay(false)
+    setTimeout(() => setIsAutoPlay(true), 5000)
+  }, [])
 
   return (
     <section ref={sectionRef} className="py-40 px-4 sm:px-6 lg:px-8 relative overflow-visible bg-gradient-to-b from-aristocrat-void via-aristocrat-void/98 to-aristocrat-void" style={{perspective: '1000px'}}>
@@ -114,89 +139,32 @@ export function CocktailGrid() {
               {/* Coverflow Items */}
               <div className="relative w-full h-full flex items-center justify-center">
                 {cocktails.map((cocktail, index) => {
-                  const offset = index - activeIndex
-                  const isActive = index === activeIndex
-                  const absOffset = Math.abs(offset)
+                  const transformData = transformsData[index]
                   
                   // Hide items that are too far away
-                  if (absOffset > 2) return null
+                  if (!transformData.visible) return null
                   
-                  // Calculate transforms
-                  const translateX = offset * 180
-                  const rotateY = offset * -45
-                  const scale = isActive ? 1 : 0.7 - (absOffset * 0.1)
-                  const zIndex = isActive ? 20 : 20 - absOffset
-                  const opacity = isActive ? 1 : 0.6 - (absOffset * 0.2)
+                  const { 
+                    isActive = false, 
+                    translateX = 0, 
+                    rotateY = 0, 
+                    scale = 1, 
+                    zIndex = 0, 
+                    opacity = 1 
+                  } = transformData
                   
                   return (
-                    <motion.div
+                    <CocktailItem
                       key={index}
-                      className="absolute cursor-pointer"
-                      style={{
-                        zIndex,
-                        transformStyle: 'preserve-3d',
-                      }}
-                      animate={{
-                        x: translateX,
-                        rotateY,
-                        scale,
-                        opacity,
-                      }}
-                      transition={{
-                        duration: 0.8,
-                        ease: [0.25, 0.46, 0.45, 0.94],
-                      }}
-                      onClick={() => goToSlide(index)}
-                    >
-                      {/* Artwork Frame */}
-                      <div className="relative w-[320px] h-[400px] lg:w-[380px] lg:h-[480px]">
-                        {/* Gallery Frame */}
-                        <div className="absolute inset-0 border-4 border-aristocrat-charcoal/30 z-10 pointer-events-none"></div>
-                        <div className="absolute -inset-2 border border-aristocrat-charcoal/20 z-10 pointer-events-none"></div>
-                        
-                        {/* The Artwork */}
-                        <div className="relative w-full h-full overflow-hidden bg-aristocrat-void/10">
-                          <OptimizedImage
-                            src={cocktail.image}
-                            alt={cocktail.name}
-                            fill
-                            className="object-cover"
-                            quality={90}
-                            sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 480px"
-                          />
-                          
-                          {/* Reflection Effect */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-aristocrat-void/30" />
-                          
-                          {/* Active Item Overlay */}
-                          {isActive && (
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-aristocrat-void/90 via-aristocrat-void/50 to-transparent pt-12 pb-6 px-6">
-                              <div className="text-center">
-                                <div className="aristocrat-subtext text-xs text-aristocrat-cream/70 mb-2">
-                                  N° {cocktail.id.padStart(2, '0')}
-                                </div>
-                                <h3 
-                                  className="text-xl lg:text-2xl font-light serif text-aristocrat-white leading-tight" 
-                                  style={{textShadow: '1px 1px 4px rgba(0,0,0,0.8)'}}
-                                >
-                                  {cocktail.name}
-                                </h3>
-                                <div className="text-xs text-aristocrat-cream/60 font-light italic mt-1">
-                                  {cocktail.category}
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                          
-                          {/* Non-active Item Number */}
-                          {!isActive && (
-                            <div className="absolute top-4 right-4 text-2xl font-light text-aristocrat-cream/40 serif">
-                              {cocktail.id.padStart(2, '0')}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </motion.div>
+                      cocktail={cocktail}
+                      isActive={isActive}
+                      translateX={translateX}
+                      rotateY={rotateY}
+                      scale={scale}
+                      zIndex={zIndex}
+                      opacity={opacity}
+                      onClick={() => handleGoToSlide(index)}
+                    />
                   )
                 })}
               </div>
@@ -231,7 +199,7 @@ export function CocktailGrid() {
             {/* Navigation Controls */}
             <div className="flex items-center gap-12">
               <button
-                onClick={prevSlide}
+                onClick={handlePrevSlide}
                 className="p-4 border border-aristocrat-charcoal/20 hover:border-aristocrat-cream/40 text-aristocrat-gray hover:text-aristocrat-white transition-all duration-300 rounded-full"
                 title="Précédent"
               >
@@ -243,7 +211,7 @@ export function CocktailGrid() {
                 {cocktails.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => goToSlide(index)}
+                    onClick={() => handleGoToSlide(index)}
                     className={`transition-all duration-300 ${
                       index === activeIndex 
                         ? 'w-3 h-3 bg-aristocrat-cream rounded-full' 
@@ -254,7 +222,7 @@ export function CocktailGrid() {
               </div>
               
               <button
-                onClick={nextSlide}
+                onClick={handleNextSlide}
                 className="p-4 border border-aristocrat-charcoal/20 hover:border-aristocrat-cream/40 text-aristocrat-gray hover:text-aristocrat-white transition-all duration-300 rounded-full"
                 title="Suivant"
               >

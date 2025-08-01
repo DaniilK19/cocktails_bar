@@ -1,52 +1,48 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useMotionValue, useTransform } from "framer-motion"
+import { memo } from "react"
+import { motion } from "framer-motion"
 import { Cocktail } from "@/data/cocktails"
 import { Wine, Droplet } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useOptimizedMouseMove } from "@/hooks/useOptimizedMouseMove"
 
 interface CocktailCardProps {
   cocktail: Cocktail
   index?: number
 }
 
-export function CocktailCard({ cocktail, index = 0 }: CocktailCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["7.5deg", "-7.5deg"])
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-7.5deg", "7.5deg"])
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return
-
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
-
-    mouseX.set(x)
-    mouseY.set(y)
-  }
-
-  const handleMouseLeave = () => {
-    mouseX.set(0)
-    mouseY.set(0)
-  }
+export const CocktailCard = memo(function CocktailCard({ cocktail, index = 0 }: CocktailCardProps) {
+  const {
+    elementRef,
+    rotateX,
+    rotateY,
+    handleMouseMove,
+    handleMouseEnter,
+    handleMouseLeave
+  } = useOptimizedMouseMove(16) // 60fps throttling
 
   return (
     <motion.div
-      ref={cardRef}
+      ref={elementRef}
       initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      animate={{ 
+        opacity: 1, 
+        y: 0,
+        rotateX: `${rotateX}deg`,
+        rotateY: `${rotateY}deg`,
+      }}
+      transition={{ 
+        opacity: { duration: 0.5, delay: index * 0.1 },
+        y: { duration: 0.5, delay: index * 0.1 },
+        rotateX: { duration: 0.1, ease: "easeOut" },
+        rotateY: { duration: 0.1, ease: "easeOut" },
+      }}
       whileHover={{ scale: 1.02 }}
       onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        rotateX,
-        rotateY,
         transformStyle: "preserve-3d",
       }}
       className="relative group cursor-pointer"
@@ -123,4 +119,4 @@ export function CocktailCard({ cocktail, index = 0 }: CocktailCardProps) {
       </div>
     </motion.div>
   )
-}
+})
