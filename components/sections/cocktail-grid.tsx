@@ -83,12 +83,6 @@ export function CocktailGrid() {
 
   return (
     <section ref={sectionRef} className="py-40 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <ParallaxBackground 
-        imageSrc="/images/collection.jpg" 
-        speed={0.5} 
-        opacity={0.18} 
-        blur={2} 
-      />
       
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}

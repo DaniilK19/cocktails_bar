@@ -68,7 +68,7 @@ export function Hero() {
       <ParallaxBackground 
         imageSrc="/images/hero.png" 
         speed={0.3} 
-        opacity={0.25} 
+        opacity={0.3} 
         blur={0.5} 
       />
       

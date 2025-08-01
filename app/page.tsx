@@ -16,12 +16,6 @@ export default function Home() {
         <About />
       </section>
       <section id="contact" className="relative overflow-hidden">
-        <ParallaxBackground 
-          imageSrc="/images/hero.png" 
-          speed={0.1} 
-          opacity={0.12} 
-          blur={3} 
-        />
         
         <div className="py-40 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-6xl mx-auto text-center">

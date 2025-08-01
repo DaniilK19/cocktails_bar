@@ -88,12 +88,6 @@ export function About() {
       ref={sectionRef}
       className="py-40 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
-      <ParallaxBackground 
-        imageSrc="/images/about.jpg" 
-        speed={0.2} 
-        opacity={0.15} 
-        blur={1.5} 
-      />
       
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-24 items-start">
