@@ -17,7 +17,8 @@
       "Bash(find:*)",
       "Bash(squoosh-cli:*)",
       "Bash(node:*)",
-      "Bash(/dev/null)"
+      "Bash(/dev/null)",
+      "Bash(npm ls:*)"
     ],
     "deny": []
   }

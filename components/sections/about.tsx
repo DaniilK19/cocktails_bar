@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { gsap } from "@/lib/gsap"
+// Lazy load GSAP to reduce initial bundle size
+const loadGSAP = () => import("@/lib/gsap").then(mod => mod.gsap)
 import { ChevronRight, Clock, Award, Sparkles, Crown } from "lucide-react"
 
 const principles = [
@@ -50,7 +51,9 @@ export function About() {
   useEffect(() => {
     if (!sectionRef.current) return
 
-    const ctx = gsap.context(() => {
+    // Load GSAP dynamically
+    loadGSAP().then((gsap) => {
+      const ctx = gsap.context(() => {
       gsap.fromTo(titleRef.current, 
         {
           y: 60,
@@ -110,7 +113,8 @@ export function About() {
       })
     }, sectionRef)
 
-    return () => ctx.revert()
+      return () => ctx.revert()
+    })
   }, [])
 
   return (

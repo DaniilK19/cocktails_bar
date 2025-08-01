@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
-import { gsap, ScrollTrigger } from "@/lib/gsap"
+// Lazy load GSAP to reduce initial bundle size
+const loadGSAP = () => import("@/lib/gsap").then(mod => ({ gsap: mod.gsap, ScrollTrigger: mod.ScrollTrigger }))
 import { ParallaxBackground } from "@/components/ui/parallax-background"
 import { ChevronDown } from "lucide-react"
 
@@ -14,47 +15,50 @@ export function Hero() {
   useEffect(() => {
     if (!heroRef.current) return
 
-    const ctx = gsap.context(() => {
-      gsap.from(titleRef.current, {
-        y: 100,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power4.out",
-      })
-
-      gsap.from(subtitleRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 1.5,
-        delay: 0.3,
-        ease: "power4.out",
-      })
-
-      gsap.from(".hero-cta", {
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        delay: 0.6,
-        ease: "power4.out",
-        stagger: 0.2,
-      })
-
-      // More performant ScrollTrigger with direct transforms
-      ScrollTrigger.create({
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1, // Add smoothing for better performance
-        animation: gsap.to(heroRef.current, {
+    // Load GSAP dynamically
+    loadGSAP().then(({ gsap, ScrollTrigger }) => {
+      const ctx = gsap.context(() => {
+        gsap.from(titleRef.current, {
           y: 100,
-          opacity: 0.5,
-          ease: "none",
-        }),
-        invalidateOnRefresh: true, // Recalculate on resize
-      })
-    }, heroRef)
+          opacity: 0,
+          duration: 1.5,
+          ease: "power4.out",
+        })
 
-    return () => ctx.revert()
+        gsap.from(subtitleRef.current, {
+          y: 50,
+          opacity: 0,
+          duration: 1.5,
+          delay: 0.3,
+          ease: "power4.out",
+        })
+
+        gsap.from(".hero-cta", {
+          y: 30,
+          opacity: 0,
+          duration: 1,
+          delay: 0.6,
+          ease: "power4.out",
+          stagger: 0.2,
+        })
+
+        // More performant ScrollTrigger with direct transforms
+        ScrollTrigger.create({
+          trigger: heroRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1, // Add smoothing for better performance
+          animation: gsap.to(heroRef.current, {
+            y: 100,
+            opacity: 0.5,
+            ease: "none",
+          }),
+          invalidateOnRefresh: true, // Recalculate on resize
+        })
+      }, heroRef)
+
+      return () => ctx.revert()
+    })
   }, [])
 
   return (
