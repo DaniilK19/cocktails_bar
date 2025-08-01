@@ -77,61 +77,63 @@ export function CocktailGrid() {
   const activeCocktail = cocktails[activeIndex]
 
   return (
-    <section ref={sectionRef} className="py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/50 to-background" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cocktail-orange/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cocktail-purple/10 rounded-full blur-3xl animate-pulse delay-1000" />
-      
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section ref={sectionRef} className="py-40 px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-6xl mx-auto relative">
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-32">
+          <motion.div 
+            className="aristocrat-subtext mb-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            Collection Signature
+          </motion.div>
           <motion.h2 
-            className="collection-title text-6xl md:text-7xl lg:text-8xl font-bold mb-8"
+            className="collection-title text-5xl md:text-6xl lg:text-7xl font-light mb-12 serif tracking-tight"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <span className="gradient-text">Signature</span>
+            <span className="text-aristocrat-white">NOS</span>
             <br />
-            <span className="text-foreground">Collection</span>
+            <span className="text-aristocrat-cream font-extralight">CRÉATIONS</span>
           </motion.h2>
+          <div className="w-16 h-px bg-aristocrat-charcoal mx-auto mb-12"></div>
           <motion.p 
-            className="collection-subtitle text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto"
+            className="collection-subtitle text-lg aristocrat-text max-w-2xl mx-auto font-extralight leading-loose sans"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            Experience the artistry of mixology through our carefully curated selection
+            Chaque cocktail raconte une histoire de savoir-faire
           </motion.p>
         </div>
 
         {/* Main Display */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-20 items-center mb-24">
           {/* Image Section */}
-          <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-cocktail-orange/20 via-cocktail-red/20 to-cocktail-purple/20 rounded-3xl blur-2xl group-hover:blur-xl transition-all duration-700" />
-            <div className="relative bg-glass backdrop-blur-2xl rounded-3xl p-8 border border-white/10 shadow-2xl">
+          <div className="relative">
+            <div className="glass-card p-12 overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}
-                  initial={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                  exit={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="aspect-square relative overflow-hidden rounded-2xl"
+                  className="aspect-square relative overflow-hidden"
                 >
                   <Image
                     src={activeCocktail.image}
                     alt={activeCocktail.name}
                     fill
-                    className="object-cover transition-transform duration-700 hover:scale-110"
+                    className="object-cover transition-transform duration-1000 hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="flex items-center gap-2 text-white/80 text-sm mb-2">
-                      <Sparkles className="w-4 h-4" />
-                      <span>{activeCocktail.category}</span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-aristocrat-void/40 via-transparent to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <div className="aristocrat-subtext text-aristocrat-cream">
+                      {activeCocktail.category}
                     </div>
                   </div>
                 </motion.div>
@@ -140,93 +142,82 @@ export function CocktailGrid() {
           </div>
 
           {/* Info Section */}
-          <div className="space-y-8">
+          <div className="space-y-12">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-2 h-2 rounded-full bg-gradient-to-r from-cocktail-orange to-cocktail-red" />
-                  <span className="text-sm uppercase tracking-wider text-muted-foreground font-semibold">
-                    #{activeCocktail.id.padStart(2, '0')}
-                  </span>
+                <div className="aristocrat-subtext mb-12">
+                  No. {activeCocktail.id.padStart(2, '0')}
                 </div>
                 
-                <h3 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+                <h3 className="text-4xl md:text-5xl font-light mb-8 serif tracking-tight text-aristocrat-white">
                   {activeCocktail.name}
                 </h3>
                 
-                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                <div className="w-12 h-px bg-aristocrat-charcoal mb-8"></div>
+                
+                <p className="text-lg aristocrat-text mb-16 leading-loose font-extralight sans">
                   {activeCocktail.description}
                 </p>
 
-                <div className="grid grid-cols-2 gap-6 mb-8">
-                  <div className="glass p-4 rounded-xl backdrop-blur-xl border border-white/10">
-                    <div className="flex items-center gap-3 mb-2">
-                      <BarChart3 className="w-5 h-5 text-cocktail-orange" />
-                      <span className="text-sm font-semibold text-muted-foreground">Alcohol</span>
-                    </div>
-                    <span className="text-2xl font-bold">{activeCocktail.alcohol}%</span>
+                <div className="grid grid-cols-2 gap-8 mb-16">
+                  <div className="minimal-border pt-6">
+                    <div className="aristocrat-subtext mb-3">Degré</div>
+                    <span className="text-2xl font-light text-aristocrat-white serif">{activeCocktail.alcohol}°</span>
                   </div>
-                  <div className="glass p-4 rounded-xl backdrop-blur-xl border border-white/10">
-                    <div className="flex items-center gap-3 mb-2">
-                      <Clock className="w-5 h-5 text-cocktail-blue" />
-                      <span className="text-sm font-semibold text-muted-foreground">Prep Time</span>
-                    </div>
-                    <span className="text-2xl font-bold">5 min</span>
+                  <div className="minimal-border pt-6">
+                    <div className="aristocrat-subtext mb-3">Temps</div>
+                    <span className="text-2xl font-light text-aristocrat-white serif">5 min</span>
                   </div>
                 </div>
 
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 px-8 rounded-full liquid-gradient text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                <motion.div
+                  whileHover={{ y: -2 }}
+                  className="aristocrat-button py-4"
                 >
-                  View Recipe
-                </motion.button>
+                  Voir la Recette
+                </motion.div>
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
 
         {/* Navigation */}
-        <div className="collection-nav flex items-center justify-center gap-8">
+        <div className="collection-nav flex items-center justify-center gap-16">
           <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ x: -2 }}
             onClick={prevSlide}
-            className="p-3 rounded-full glass backdrop-blur-xl border border-white/20 hover:border-white/40 transition-colors"
+            className="aristocrat-link py-2"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 text-aristocrat-gray" />
           </motion.button>
 
-          <div className="flex gap-3">
+          <div className="flex gap-6">
             {cocktails.map((_, index) => (
               <motion.button
                 key={index}
                 whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.8 }}
                 onClick={() => goToSlide(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 transition-all duration-700 ${
                   index === activeIndex 
-                    ? 'bg-gradient-to-r from-cocktail-orange to-cocktail-red shadow-lg' 
-                    : 'bg-white/20 hover:bg-white/40'
+                    ? 'bg-aristocrat-white' 
+                    : 'bg-aristocrat-charcoal hover:bg-aristocrat-gray'
                 }`}
               />
             ))}
           </div>
 
           <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ x: 2 }}
             onClick={nextSlide}
-            className="p-3 rounded-full glass backdrop-blur-xl border border-white/20 hover:border-white/40 transition-colors"
+            className="aristocrat-link py-2"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 text-aristocrat-gray" />
           </motion.button>
         </div>
       </div>

@@ -51,11 +51,23 @@ const config: Config = {
           blue: "hsl(var(--cocktail-blue))",
           purple: "hsl(var(--cocktail-purple))",
         },
+        aristocrat: {
+          white: "hsl(var(--aristocrat-white))",
+          cream: "hsl(var(--aristocrat-cream))",
+          gray: "hsl(var(--aristocrat-gray))",
+          charcoal: "hsl(var(--aristocrat-charcoal))",
+          obsidian: "hsl(var(--aristocrat-obsidian))",
+          void: "hsl(var(--aristocrat-void))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        serif: ["Playfair Display", "serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
       },
       keyframes: {
         "float": {
@@ -72,11 +84,26 @@ const config: Config = {
           "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
           "100%": { transform: "translate(0, 0) scale(1)" },
         },
+        "shimmer": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "gradient-shift": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "gentle-glow": {
+          "0%, 100%": { boxShadow: "0 8px 32px rgba(255, 215, 0, 0.2)" },
+          "50%": { boxShadow: "0 8px 32px rgba(255, 215, 0, 0.4)" },
+        },
       },
       animation: {
         "float": "float 6s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "liquid": "liquid 10s ease-in-out infinite",
+        "shimmer": "shimmer 3s ease-in-out infinite",
+        "gradient-shift": "gradient-shift 6s ease infinite",
+        "gentle-glow": "gentle-glow 4s ease-in-out infinite",
       },
     },
   },

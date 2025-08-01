@@ -72,58 +72,58 @@ export function Hero() {
 
       <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
         <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="inline-flex items-center gap-3 px-6 py-3 rounded-full backdrop-blur-xl bg-gradient-to-r from-white/20 via-white/10 to-white/5 border border-white/30 shadow-[0_8px_32px_rgba(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgba(251,146,60,0.3)] hover:border-white/50 transition-all duration-300 mb-8 hero-cta group"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          className="mb-16 hero-cta"
         >
-          <div className="p-1 rounded-full bg-gradient-to-r from-cocktail-yellow to-cocktail-orange">
-            <Sparkles className="w-3 h-3 text-white group-hover:rotate-12 transition-transform duration-300" />
+          <div className="aristocrat-subtext text-center">
+            Est. MMXXIV — Artisanal Spirits
           </div>
-          <span className="text-sm font-semibold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">Premium Cocktail Experience</span>
         </motion.div>
 
         <h1
           ref={titleRef}
-          className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6"
+          className="text-6xl md:text-7xl lg:text-8xl font-light mb-12 serif tracking-tight"
         >
-          <span className="gradient-text">Mixology</span>
+          <span className="text-aristocrat-white">MAISON</span>
           <br />
-          <span className="text-foreground">Redefined</span>
+          <span className="text-aristocrat-cream font-extralight">COCKTAIL</span>
         </h1>
+
+        <div className="w-24 h-px bg-aristocrat-charcoal mx-auto mb-12"></div>
 
         <p
           ref={subtitleRef}
-          className="text-xl md:text-2xl lg:text-3xl text-muted-foreground mb-12 max-w-3xl mx-auto"
+          className="text-lg md:text-xl aristocrat-text mb-20 max-w-2xl mx-auto font-extralight leading-loose sans"
         >
-          Discover the art of crafting extraordinary cocktails with our curated collection
-          of premium recipes and techniques
+          L'art de la mixologie française
+          <br />
+          <span className="aristocrat-subtext mt-6 block">Une expérience raffinée</span>
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center hero-cta">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 rounded-full liquid-gradient text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow"
+        <div className="flex flex-col sm:flex-row gap-12 justify-center items-center hero-cta">
+          <motion.div
+            whileHover={{ y: -2 }}
+            className="aristocrat-button px-8 py-4"
           >
-            Explore Collection
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 rounded-full glass font-semibold text-lg hover:bg-white/20 transition-colors"
+            Découvrir la Collection
+          </motion.div>
+          <motion.div
+            whileHover={{ y: -2 }}
+            className="aristocrat-link px-8 py-4"
           >
-            Watch Tutorial
-          </motion.button>
+            Réserver une Dégustation
+          </motion.div>
         </div>
       </div>
 
       <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ duration: 4, repeat: Infinity }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2"
       >
-        <ChevronDown className="w-8 h-8 text-muted-foreground" />
+        <ChevronDown className="w-5 h-5 text-aristocrat-gray" />
       </motion.div>
     </section>
   )
