@@ -87,7 +87,7 @@ export function CocktailGrid() {
   const activeCocktail = cocktails[activeIndex]
 
   return (
-    <section ref={sectionRef} className="py-40 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-b from-aristocrat-void via-aristocrat-void/98 to-aristocrat-void">
+    <section ref={sectionRef} className="py-40 px-4 sm:px-6 lg:px-8 relative overflow-visible bg-gradient-to-b from-aristocrat-void via-aristocrat-void/98 to-aristocrat-void" style={{perspective: '1000px'}}>
       
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Gallery Header */}
@@ -103,134 +103,172 @@ export function CocktailGrid() {
           <div className="w-24 lg:w-32 h-px bg-gradient-to-r from-transparent via-aristocrat-charcoal to-transparent mx-auto"></div>
         </div>
 
-        {/* Art Gallery Display */}
+        {/* Coverflow Gallery Display */}
         <div ref={contentRef} className="relative">
-          {/* Main Artwork Showcase */}
-          <div className="max-w-5xl mx-auto mb-20 lg:mb-32">
+          {/* Coverflow Container */}
+          <div className="max-w-7xl mx-auto mb-20 lg:mb-32">
             
-            {/* Masterpiece Frame */}
-            <div className="relative">
+            {/* Coverflow Showcase */}
+            <div className="relative h-[500px] lg:h-[600px] flex items-center justify-center overflow-hidden">
               
-              {/* Gallery Frame */}
-              <div className="relative aspect-[5/4] overflow-hidden bg-aristocrat-void/10">
-                {/* Museum-style Frame */}
-                <div className="absolute inset-0 border-8 border-aristocrat-charcoal/20 z-10 pointer-events-none"></div>
-                <div className="absolute -inset-4 border-2 border-aristocrat-charcoal/10 z-10 pointer-events-none"></div>
-                <div className="absolute -inset-8 border border-aristocrat-charcoal/5 z-10 pointer-events-none"></div>
-                
-                {/* The Artwork */}
-                <div className="relative w-full h-full overflow-hidden">
-                  <Image
-                    key={`artwork-${activeIndex}`}
-                    src={activeCocktail.image}
-                    alt={activeCocktail.name}
-                    fill
-                    className="object-cover transition-all duration-1500 ease-out"
-                    priority
-                    quality={95}
-                  />
+              {/* Coverflow Items */}
+              <div className="relative w-full h-full flex items-center justify-center">
+                {cocktails.map((cocktail, index) => {
+                  const offset = index - activeIndex
+                  const isActive = index === activeIndex
+                  const absOffset = Math.abs(offset)
                   
-                  {/* Subtle Gallery Lighting */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-aristocrat-void/20 via-transparent to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-b from-aristocrat-void/10 via-transparent to-transparent" />
+                  // Hide items that are too far away
+                  if (absOffset > 2) return null
                   
-                  {/* Title on Image */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-aristocrat-void/80 via-aristocrat-void/40 to-transparent pt-16 pb-8 px-8">
-                    <div className="flex items-end justify-between">
-                      <div>
-                        <div className="aristocrat-subtext text-xs text-aristocrat-cream/60 mb-2">
-                          Collection Privée • N° {activeCocktail.id.padStart(2, '0')}
-                        </div>
-                        <h3 className="text-3xl lg:text-4xl font-light serif text-aristocrat-white leading-tight tracking-wide" style={{textShadow: '2px 2px 8px rgba(0,0,0,0.8)'}}>
-                          {activeCocktail.name}
-                        </h3>
-                        <div className="text-sm text-aristocrat-cream/70 font-light italic mt-1">
-                          {activeCocktail.category}
+                  // Calculate transforms
+                  const translateX = offset * 180
+                  const rotateY = offset * -45
+                  const scale = isActive ? 1 : 0.7 - (absOffset * 0.1)
+                  const zIndex = isActive ? 20 : 20 - absOffset
+                  const opacity = isActive ? 1 : 0.6 - (absOffset * 0.2)
+                  
+                  return (
+                    <motion.div
+                      key={index}
+                      className="absolute cursor-pointer"
+                      style={{
+                        zIndex,
+                        transformStyle: 'preserve-3d',
+                      }}
+                      animate={{
+                        x: translateX,
+                        rotateY,
+                        scale,
+                        opacity,
+                      }}
+                      transition={{
+                        duration: 0.8,
+                        ease: [0.25, 0.46, 0.45, 0.94],
+                      }}
+                      onClick={() => goToSlide(index)}
+                    >
+                      {/* Artwork Frame */}
+                      <div className="relative w-[320px] h-[400px] lg:w-[380px] lg:h-[480px]">
+                        {/* Gallery Frame */}
+                        <div className="absolute inset-0 border-4 border-aristocrat-charcoal/30 z-10 pointer-events-none"></div>
+                        <div className="absolute -inset-2 border border-aristocrat-charcoal/20 z-10 pointer-events-none"></div>
+                        
+                        {/* The Artwork */}
+                        <div className="relative w-full h-full overflow-hidden bg-aristocrat-void/10">
+                          <Image
+                            src={cocktail.image}
+                            alt={cocktail.name}
+                            fill
+                            className="object-cover"
+                            quality={90}
+                          />
+                          
+                          {/* Reflection Effect */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-aristocrat-void/30" />
+                          
+                          {/* Active Item Overlay */}
+                          {isActive && (
+                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-aristocrat-void/90 via-aristocrat-void/50 to-transparent pt-12 pb-6 px-6">
+                              <div className="text-center">
+                                <div className="aristocrat-subtext text-xs text-aristocrat-cream/70 mb-2">
+                                  N° {cocktail.id.padStart(2, '0')}
+                                </div>
+                                <h3 
+                                  className="text-xl lg:text-2xl font-light serif text-aristocrat-white leading-tight" 
+                                  style={{textShadow: '1px 1px 4px rgba(0,0,0,0.8)'}}
+                                >
+                                  {cocktail.name}
+                                </h3>
+                                <div className="text-xs text-aristocrat-cream/60 font-light italic mt-1">
+                                  {cocktail.category}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {/* Non-active Item Number */}
+                          {!isActive && (
+                            <div className="absolute top-4 right-4 text-2xl font-light text-aristocrat-cream/40 serif">
+                              {cocktail.id.padStart(2, '0')}
+                            </div>
+                          )}
                         </div>
                       </div>
-                      <div className="text-6xl lg:text-7xl font-extralight text-aristocrat-cream/20 serif leading-none" style={{textShadow: '1px 1px 4px rgba(0,0,0,0.6)'}}>
-                        {activeCocktail.id.padStart(2, '0')}
-                      </div>
-                    </div>
+                    </motion.div>
+                  )
+                })}
+              </div>
+            </div>
+            
+            {/* Current Item Details */}
+            <div className="text-center mt-12 lg:mt-16">
+              <div className="max-w-2xl mx-auto">
+                <motion.div
+                  key={`details-${activeIndex}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <div className="aristocrat-subtext mb-4">
+                    Collection Privée • Œuvre {activeIndex + 1} sur {cocktails.length}
                   </div>
-                </div>
+                  <h2 className="text-3xl lg:text-4xl font-light serif text-aristocrat-white mb-4">
+                    {activeCocktail.name}
+                  </h2>
+                  <p className="text-aristocrat-cream/80 font-extralight leading-relaxed">
+                    {activeCocktail.description}
+                  </p>
+                </motion.div>
               </div>
             </div>
           </div>
 
-          {/* Gallery Navigation */}
-          <div className="flex flex-col items-center gap-8">
+          {/* Coverflow Navigation */}
+          <div className="flex flex-col items-center gap-8 mt-16">
             
-            {/* Gallery Thumbnails */}
-            <div className="flex flex-wrap justify-center gap-4 max-w-4xl">
-              {cocktails.map((cocktail, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  className={`group relative overflow-hidden transition-all duration-500 ${
-                    index === activeIndex 
-                      ? 'w-20 h-20 lg:w-24 lg:h-24 ring-2 ring-aristocrat-cream/60 scale-110' 
-                      : 'w-16 h-16 lg:w-20 lg:h-20 ring-1 ring-aristocrat-charcoal/20 hover:ring-aristocrat-cream/40 opacity-70 hover:opacity-90 hover:scale-105'
-                  }`}
-                >
-                  {/* Gallery Frame for Thumbnail */}
-                  <div className="absolute inset-0 border-2 border-aristocrat-charcoal/30 z-10 pointer-events-none group-hover:border-aristocrat-cream/40 transition-colors duration-300"></div>
-                  
-                  <Image
-                    src={cocktail.image}
-                    alt={cocktail.name}
-                    fill
-                    className="object-cover"
-                    quality={80}
-                  />
-                  
-                  {/* Artwork Number */}
-                  <div className="absolute bottom-1 right-1 bg-aristocrat-void/80 px-1 py-0.5 text-xs text-aristocrat-cream/80">
-                    {cocktail.id.padStart(2, '0')}
-                  </div>
-                  
-                  {/* Subtle Gallery Lighting */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-aristocrat-void/30 via-transparent to-transparent" />
-                </button>
-              ))}
-            </div>
-            
-            {/* Gallery Controls */}
-            <div className="flex items-center gap-8">
+            {/* Navigation Controls */}
+            <div className="flex items-center gap-12">
               <button
                 onClick={prevSlide}
-                className="p-3 border border-aristocrat-charcoal/20 hover:border-aristocrat-cream/40 text-aristocrat-gray hover:text-aristocrat-white transition-all duration-300 rounded"
-                title="Œuvre précédente"
+                className="p-4 border border-aristocrat-charcoal/20 hover:border-aristocrat-cream/40 text-aristocrat-gray hover:text-aristocrat-white transition-all duration-300 rounded-full"
+                title="Précédent"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-6 h-6" />
               </button>
               
-              <div className="text-center">
-                <div className="aristocrat-subtext text-xs mb-1">
-                  Œuvre {activeIndex + 1} sur {cocktails.length}
-                </div>
-                <div className="text-aristocrat-white font-light text-sm">
-                  {activeCocktail.name}
-                </div>
+              {/* Progress Dots */}
+              <div className="flex items-center gap-3">
+                {cocktails.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`transition-all duration-300 ${
+                      index === activeIndex 
+                        ? 'w-3 h-3 bg-aristocrat-cream rounded-full' 
+                        : 'w-2 h-2 bg-aristocrat-charcoal hover:bg-aristocrat-gray rounded-full'
+                    }`}
+                  />
+                ))}
               </div>
               
               <button
                 onClick={nextSlide}
-                className="p-3 border border-aristocrat-charcoal/20 hover:border-aristocrat-cream/40 text-aristocrat-gray hover:text-aristocrat-white transition-all duration-300 rounded"
-                title="Œuvre suivante"
+                className="p-4 border border-aristocrat-charcoal/20 hover:border-aristocrat-cream/40 text-aristocrat-gray hover:text-aristocrat-white transition-all duration-300 rounded-full"
+                title="Suivant"
               >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-6 h-6" />
               </button>
             </div>
             
             {/* Exhibition Info */}
-            <div className="text-center pt-8 border-t border-aristocrat-charcoal/20 max-w-2xl">
-              <div className="aristocrat-subtext text-xs mb-2">
-                Collection Privée — Maison Cocktail
+            <div className="text-center pt-8 border-t border-aristocrat-charcoal/20 max-w-3xl">
+              <div className="aristocrat-subtext text-xs mb-3">
+                Collection Privée — Maison Cocktail — Paris
               </div>
               <p className="text-sm text-aristocrat-cream/60 font-extralight leading-relaxed">
-                Chaque création est une œuvre d'art liquide, fruit d'un savoir-faire artisanal<br className="hidden lg:block" />
-                et d'une recherche esthétique perpétuelle
+                Parcourez notre collection exclusive d'art liquide, où chaque création<br className="hidden lg:block" />
+                représente l'essence même du raffinement français
               </p>
             </div>
           </div>
