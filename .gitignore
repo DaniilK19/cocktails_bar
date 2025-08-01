@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+*.lcov
+.nyc_output
 
 # next.js
 /.next/
@@ -19,15 +21,21 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
 *.pem
+*.key
+*.crt
+*.csr
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
@@ -41,11 +49,15 @@ yarn-error.log*
 next-env.d.ts
 
 # IDE and editor files
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 .idea/
 *.swp
 *.swo
 *~
+*.sublime-project
+*.sublime-workspace
 
 # OS generated files
 .DS_Store
@@ -53,29 +65,23 @@ next-env.d.ts
 ._*
 .Spotlight-V100
 .Trashes
+.AppleDouble
+.LSOverride
 ehthumbs.db
+ehthumbs_vista.db
 Thumbs.db
+Thumbs.db:encryptable
+desktop.ini
 
 # Logs
-logs
+logs/
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
 
 # Runtime data
 pids
 *.pid
 *.seed
 *.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-*.lcov
-
-# nyc test coverage
-.nyc_output
 
 # Dependency directories
 jspm_packages/
@@ -102,8 +108,31 @@ jspm_packages/
 # GSAP premium files (if any)
 gsap-bonus.tgz
 
-# Local environment variables
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# SEO and Analytics
+google*.html
+BingSiteAuth.xml
+yandex_*.html
+robots_test.txt
+
+# Temporary optimization scripts
+/scripts/optimize-*.mjs
+/scripts/temp-*.js
+
+# Backup files
+*.backup
+*.bak
+*.old
+
+# Database files
+*.sqlite
+*.db
+
+# PWA files
+**/public/sw.js
+**/public/workbox-*.js
+**/public/worker-*.js
+**/public/fallback-*.js
+
+# Sitemap cache (if generated dynamically)
+public/sitemap-*.xml
+public/sitemap.xml.gz
