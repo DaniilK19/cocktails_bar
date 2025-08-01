@@ -37,9 +37,9 @@ export function Footer() {
                 <h3 className="text-2xl font-light serif tracking-wider text-aristocrat-white mb-2">
                   MAISON<span className="text-aristocrat-cream font-extralight ml-2">COCKTAIL</span>
                 </h3>
-                <div className="aristocrat-subtext mb-8">
-                  Paris — MMXXIV
-                </div>
+                <p className="aristocrat-subtext mb-8">
+                  Paris — <time dateTime="2024">MMXXIV</time>
+                </p>
               </div>
               <p className="aristocrat-text font-extralight leading-loose mb-12 max-w-sm">
                 L&apos;excellence française au service de l&apos;art cocktail. 
@@ -63,6 +63,7 @@ export function Footer() {
                       <Link
                         href={link.href}
                         className="aristocrat-link text-sm"
+                        title={`Découvrir ${link.name.toLowerCase()}`}
                       >
                         {link.name}
                       </Link>
@@ -79,6 +80,7 @@ export function Footer() {
                       <Link
                         href={link.href}
                         className="aristocrat-link text-sm"
+                        title={`En savoir plus sur ${link.name.toLowerCase()}`}
                       >
                         {link.name}
                       </Link>
@@ -97,17 +99,17 @@ export function Footer() {
             >
               <h4 className="aristocrat-subtext mb-8">Contact</h4>
               <div className="space-y-6 aristocrat-text font-extralight text-sm">
-                <div>
+                <address className="not-italic">
                   <p>12 Place Vendôme</p>
                   <p>75001 Paris, France</p>
-                </div>
+                </address>
                 <div>
-                  <p>+33 1 42 96 10 73</p>
-                  <p>contact@maisoncocktail.fr</p>
+                  <p><a href="tel:+33142961073" className="hover:text-aristocrat-cream transition-colors" title="Appeler Maison Cocktail">+33 1 42 96 10 73</a></p>
+                  <p><a href="mailto:contact@maisoncocktail.fr" className="hover:text-aristocrat-cream transition-colors" title="Envoyer un email à Maison Cocktail">contact@maisoncocktail.fr</a></p>
                 </div>
                 <div>
                   <p className="aristocrat-subtext">
-                    Mar — Sam · 18h00 — 02h00
+                    <time>Mar — Sam</time> · <time>18h00 — 02h00</time>
                   </p>
                 </div>
               </div>
@@ -124,16 +126,16 @@ export function Footer() {
           className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
         >
           <p className="aristocrat-subtext text-xs">
-            © MMXXIV Maison Cocktail. Tous droits réservés.
+            © <time dateTime="2024">MMXXIV</time> Maison Cocktail. Tous droits réservés.
           </p>
-          <div className="flex gap-8">
-            <Link href="#" className="aristocrat-subtext text-xs hover:text-aristocrat-cream transition-colors duration-300">
+          <nav className="flex gap-8" aria-label="Liens légaux">
+            <Link href="#" className="aristocrat-subtext text-xs hover:text-aristocrat-cream transition-colors duration-300" title="Consulter les mentions légales">
               Mentions Légales
             </Link>
-            <Link href="#" className="aristocrat-subtext text-xs hover:text-aristocrat-cream transition-colors duration-300">
+            <Link href="#" className="aristocrat-subtext text-xs hover:text-aristocrat-cream transition-colors duration-300" title="Consulter la politique de confidentialité">
               Confidentialité
             </Link>
-          </div>
+          </nav>
         </motion.div>
       </div>
     </footer>

@@ -55,7 +55,7 @@ export const CocktailItem = memo(function CocktailItem({
         <div className="relative w-full h-full overflow-hidden bg-aristocrat-void/10">
           <OptimizedImage
             src={cocktail.image}
-            alt={cocktail.name}
+            alt={`${cocktail.name} - ${cocktail.category} cocktail artisanal de Maison Cocktail`}
             fill
             className="object-cover"
             quality={90}

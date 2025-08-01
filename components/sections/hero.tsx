@@ -83,9 +83,9 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.2 }}
           className="mb-16 hero-cta"
         >
-          <div className="aristocrat-subtext text-center">
-            Est. MMXXIV — Artisanal Spirits
-          </div>
+          <p className="aristocrat-subtext text-center">
+            <time dateTime="2024">Est. MMXXIV</time> — Artisanal Spirits
+          </p>
         </motion.div>
 
         <h1
@@ -97,7 +97,7 @@ export function Hero() {
           <span className="text-aristocrat-cream font-extralight">COCKTAIL</span>
         </h1>
 
-        <div className="w-24 h-px bg-aristocrat-charcoal mx-auto mb-12"></div>
+        <hr className="w-24 h-px bg-aristocrat-charcoal mx-auto mb-12 border-0" aria-hidden="true" />
 
         <p
           ref={subtitleRef}
@@ -108,29 +108,38 @@ export function Hero() {
           <span className="aristocrat-subtext mt-6 block">Une expérience raffinée</span>
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-12 justify-center items-center hero-cta">
-          <motion.div
+        <nav className="flex flex-col sm:flex-row gap-12 justify-center items-center hero-cta" aria-label="Actions principales">
+          <motion.a
+            href="#cocktails"
             whileHover={{ y: -2 }}
             className="aristocrat-button px-8 py-4"
+            aria-label="Voir notre collection de cocktails"
+            title="Découvrir notre collection exclusive de cocktails artisanaux"
           >
             Découvrir la Collection
-          </motion.div>
-          <motion.div
+          </motion.a>
+          <motion.a
+            href="#contact"
             whileHover={{ y: -2 }}
             className="aristocrat-link px-8 py-4"
+            aria-label="Réserver une dégustation de cocktails"
+            title="Réserver une expérience de dégustation personnalisée"
           >
             Réserver une Dégustation
-          </motion.div>
-        </div>
+          </motion.a>
+        </nav>
       </div>
 
-      <motion.div
+      <motion.a
+        href="#cocktails"
         animate={{ y: [0, 8, 0] }}
         transition={{ duration: 4, repeat: Infinity }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2"
+        aria-label="Défiler vers la collection de cocktails"
+        title="Défiler pour découvrir notre collection"
       >
         <ChevronDown className="w-5 h-5 text-aristocrat-gray" />
-      </motion.div>
+      </motion.a>
     </section>
   )
 }

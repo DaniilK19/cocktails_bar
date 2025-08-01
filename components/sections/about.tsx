@@ -123,7 +123,7 @@ export function About() {
       className="py-40 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
       {/* Static Background */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         <div
           className="absolute inset-0 w-full h-full"
           style={{
@@ -135,20 +135,22 @@ export function About() {
             backgroundRepeat: 'no-repeat',
             backgroundAttachment: 'fixed'
           }}
+          role="img"
+          aria-label="Maison Cocktail - Notre histoire et héritage"
         />
       </div>
       
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-24 items-start">
-          <div>
-            <motion.div
+          <article>
+            <motion.p
               className="aristocrat-subtext mb-8"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
             >
               Notre Histoire
-            </motion.div>
+            </motion.p>
 
             <motion.h2
               ref={titleRef}
@@ -162,7 +164,7 @@ export function About() {
               <span className="text-aristocrat-cream font-extralight">D&apos;EXCEPTION</span>
             </motion.h2>
 
-            <div className="w-16 h-px bg-aristocrat-charcoal mb-12"></div>
+            <hr className="w-16 h-px bg-aristocrat-charcoal mb-12 border-0" aria-hidden="true" />
 
             <motion.div
               ref={contentRef}
@@ -185,9 +187,9 @@ export function About() {
                 sensorielles uniques pour une clientèle exigeante.
               </p>
             </motion.div>
-          </div>
+          </article>
 
-          <div className="space-y-8">
+          <aside className="space-y-8" aria-label="Nos principes fondateurs">
             {principles.map((principle, index) => {
               const Icon = principle.icon
               const isActive = activeIndex === index
@@ -286,9 +288,13 @@ export function About() {
                                 {principle.stats}
                               </div>
                               
-                              <div className="aristocrat-button text-xs py-2 px-4 cursor-pointer border border-aristocrat-charcoal/30 hover:border-aristocrat-cream/40 transition-all duration-300">
+                              <button 
+                                className="aristocrat-button text-xs py-2 px-4 cursor-pointer border border-aristocrat-charcoal/30 hover:border-aristocrat-cream/40 transition-all duration-300"
+                                title={`En savoir plus sur ${principle.title.toLowerCase()}`}
+                                aria-label={`En savoir plus sur notre principe: ${principle.title}`}
+                              >
                                 En savoir plus
-                              </div>
+                              </button>
                             </div>
                           </div>
                         </motion.div>
@@ -318,7 +324,7 @@ export function About() {
                 Cliquez sur chaque principe pour découvrir notre histoire
               </div>
             </motion.div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>

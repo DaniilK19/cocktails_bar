@@ -122,7 +122,7 @@ export function ParallaxBackground({
       >
         <OptimizedImage
           src={imageSrc}
-          alt="Background"
+          alt={imageSrc.includes('hero') ? "Maison Cocktail - Bar à cocktails artisanaux Paris" : "Maison Cocktail - Ambiance élégante"}
           fill
           className="object-cover object-center"
           priority={imageSrc.includes('hero')}

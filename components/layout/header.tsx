@@ -39,20 +39,23 @@ export function Header() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <motion.a
-              href="#"
+              href="/"
               whileHover={{ y: -2 }}
               className="text-2xl font-light serif tracking-wider text-aristocrat-white cursor-pointer"
+              aria-label="Maison Cocktail - Accueil"
+              title="Retourner à l'accueil"
             >
               MAISON<span className="text-aristocrat-cream font-extralight ml-2">COCKTAIL</span>
             </motion.a>
 
-            <nav className="hidden md:flex items-center space-x-12">
+            <nav className="hidden md:flex items-center space-x-12" aria-label="Navigation principale">
               {navItems.map((item) => (
                 <motion.a
                   key={item.name}
                   href={item.href}
                   whileHover={{ y: -2 }}
                   className="aristocrat-link text-sm"
+                  title={`Aller à la section ${item.name}`}
                 >
                   {item.name}
                 </motion.a>
@@ -60,12 +63,14 @@ export function Header() {
             </nav>
 
             <div className="hidden md:flex">
-              <motion.div
+              <motion.a
+                href="#contact"
                 whileHover={{ y: -2 }}
                 className="aristocrat-button px-6 py-3 text-xs"
+                title="Réserver une table ou une dégustation"
               >
                 Réservation
-              </motion.div>
+              </motion.a>
             </div>
 
             <motion.button
@@ -73,6 +78,8 @@ export function Header() {
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 text-aristocrat-gray hover:text-aristocrat-white transition-colors duration-300"
+              aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
                 <X className="w-5 h-5" />
@@ -103,6 +110,7 @@ export function Header() {
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 120 }}
               className="absolute right-0 top-0 h-full w-80 bg-aristocrat-void/95 backdrop-blur-sm p-8 pt-24 minimal-border"
+              aria-label="Navigation mobile"
             >
               <div className="space-y-8">
                 {navItems.map((item, index) => (
@@ -114,18 +122,22 @@ export function Header() {
                     transition={{ delay: index * 0.1 + 0.2 }}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="block aristocrat-link text-lg py-2"
+                    title={`Aller à la section ${item.name}`}
                   >
                     {item.name}
                   </motion.a>
                 ))}
-                <motion.div
+                <motion.a
+                  href="#contact"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="aristocrat-button px-6 py-4 mt-12"
+                  className="aristocrat-button px-6 py-4 mt-12 block text-center"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  title="Réserver une table ou une dégustation"
                 >
                   Réservation
-                </motion.div>
+                </motion.a>
               </div>
             </motion.nav>
           </motion.div>

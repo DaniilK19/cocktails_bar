@@ -6,6 +6,7 @@ import { useState } from 'react'
 interface OptimizedImageProps {
   src: string
   alt: string
+  title?: string
   width?: number
   height?: number
   className?: string
@@ -18,6 +19,7 @@ interface OptimizedImageProps {
 export function OptimizedImage({
   src,
   alt,
+  title,
   width,
   height,
   className = "",
@@ -46,6 +48,7 @@ export function OptimizedImage({
       <Image
         src={imgSrc}
         alt={alt}
+        title={title || alt}
         fill
         className={className}
         priority={priority}
@@ -60,6 +63,7 @@ export function OptimizedImage({
     <Image
       src={imgSrc}
       alt={alt}
+      title={title || alt}
       width={width}
       height={height}
       className={className}
