@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { gsap } from "@/lib/gsap"
+import { ParallaxBackground } from "@/components/ui/parallax-background"
 
 const principles = [
   { number: "01", title: "Tradition", description: "Héritage des maîtres verriers" },
@@ -85,9 +86,16 @@ export function About() {
   return (
     <section
       ref={sectionRef}
-      className="py-40 px-4 sm:px-6 lg:px-8"
+      className="py-40 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto">
+      <ParallaxBackground 
+        imageSrc="/images/about.jpg" 
+        speed={0.2} 
+        opacity={0.15} 
+        blur={1.5} 
+      />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-24 items-start">
           <div>
             <motion.div

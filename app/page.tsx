@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/hero"
 import { CocktailGrid } from "@/components/sections/cocktail-grid"
 import { About } from "@/components/sections/about"
+import { ParallaxBackground } from "@/components/ui/parallax-background"
 
 export default function Home() {
   return (
@@ -14,8 +15,15 @@ export default function Home() {
       <section id="about">
         <About />
       </section>
-      <section id="contact">
-        <div className="py-40 px-4 sm:px-6 lg:px-8">
+      <section id="contact" className="relative overflow-hidden">
+        <ParallaxBackground 
+          imageSrc="/images/hero.png" 
+          speed={0.1} 
+          opacity={0.12} 
+          blur={3} 
+        />
+        
+        <div className="py-40 px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-5xl md:text-6xl font-light mb-12 serif tracking-tight">
               <span className="text-aristocrat-white">NOUS</span>

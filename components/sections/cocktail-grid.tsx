@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { gsap } from "@/lib/gsap"
 import { cocktails } from "@/data/cocktails"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ParallaxBackground } from "@/components/ui/parallax-background"
 import Image from "next/image"
 
 export function CocktailGrid() {
@@ -81,8 +82,15 @@ export function CocktailGrid() {
   const activeCocktail = cocktails[activeIndex]
 
   return (
-    <section ref={sectionRef} className="py-40 px-4 sm:px-6 lg:px-8 relative">
-      <div className="max-w-6xl mx-auto relative">
+    <section ref={sectionRef} className="py-40 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <ParallaxBackground 
+        imageSrc="/images/collection.jpg" 
+        speed={0.5} 
+        opacity={0.18} 
+        blur={2} 
+      />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
         <div ref={headerRef} className="text-center mb-32">
           <div className="aristocrat-subtext mb-8">
