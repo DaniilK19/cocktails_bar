@@ -3,53 +3,79 @@
 import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { gsap } from "@/lib/gsap"
-import { ParallaxWrapper } from "@/components/ui/parallax-wrapper"
-import { LiquidBlob } from "@/components/ui/liquid-blob"
-import { Award, Users, Clock, Star } from "lucide-react"
 
-const stats = [
-  { icon: Award, value: "200+", label: "Unique Recipes" },
-  { icon: Users, value: "50k+", label: "Happy Customers" },
-  { icon: Clock, value: "10+", label: "Years Experience" },
-  { icon: Star, value: "4.9", label: "Average Rating" },
+const principles = [
+  { number: "01", title: "Tradition", description: "Héritage des maîtres verriers" },
+  { number: "02", title: "Innovation", description: "Créativité contemporaine" },
+  { number: "03", title: "Excellence", description: "Perfection dans chaque détail" },
+  { number: "04", title: "Raffinement", description: "L'élégance française" },
 ]
 
 export function About() {
   const sectionRef = useRef<HTMLElement>(null)
+  const titleRef = useRef<HTMLHeadingElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!sectionRef.current) return
 
     const ctx = gsap.context(() => {
-      const content = contentRef.current?.children
-      if (!content) return
-
-      gsap.from(content, {
-        y: 80,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: "top 80%",
-        },
-      })
-
-      const statItems = sectionRef.current?.querySelectorAll(".stat-item")
-      statItems?.forEach((item, index) => {
-        gsap.from(item, {
-          scale: 0,
+      gsap.fromTo(titleRef.current, 
+        {
+          y: 60,
           opacity: 0,
-          duration: 0.6,
-          delay: index * 0.1,
-          ease: "back.out(1.7)",
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: item,
+            trigger: titleRef.current,
             start: "top 85%",
+            toggleActions: "play none none none",
           },
-        })
+        }
+      )
+
+      gsap.fromTo(contentRef.current,
+        {
+          y: 40,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      )
+
+      const principleItems = sectionRef.current?.querySelectorAll(".principle-item")
+      principleItems?.forEach((item, index) => {
+        gsap.fromTo(item,
+          {
+            y: 30,
+            opacity: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            delay: index * 0.15,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: item,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+          }
+        )
       })
     }, sectionRef)
 
@@ -59,66 +85,79 @@ export function About() {
   return (
     <section
       ref={sectionRef}
-      id="about"
-      className="relative py-24 overflow-hidden"
+      className="py-40 px-4 sm:px-6 lg:px-8"
     >
-      <ParallaxWrapper speed={0.3} className="absolute inset-0">
-        <LiquidBlob className="w-96 h-96 -top-48 -left-48" color="cocktail-purple" />
-      </ParallaxWrapper>
-      <ParallaxWrapper speed={0.5} className="absolute inset-0">
-        <LiquidBlob className="w-80 h-80 -bottom-32 -right-32" color="cocktail-green" />
-      </ParallaxWrapper>
+      <div className="max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-24 items-start">
+          <div>
+            <motion.div
+              className="aristocrat-subtext mb-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              Notre Histoire
+            </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <ParallaxWrapper speed={0.2}>
-            <div ref={contentRef}>
-              <motion.h2
+            <motion.h2
+              ref={titleRef}
+              className="text-5xl md:text-6xl font-light mb-12 serif tracking-tight"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-aristocrat-white">UNE MAISON</span>
+              <br />
+              <span className="text-aristocrat-cream font-extralight">D'EXCEPTION</span>
+            </motion.h2>
+
+            <div className="w-16 h-px bg-aristocrat-charcoal mb-12"></div>
+
+            <motion.div
+              ref={contentRef}
+              className="space-y-8 aristocrat-text leading-loose font-extralight sans"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <p>
+                Depuis notre fondation, nous perpétuons l'art ancestral de la mixologie 
+                française, alliant techniques traditionnelles et vision contemporaine.
+              </p>
+              <p>
+                Chaque création naît d'une recherche minutieuse, d'une sélection 
+                rigoureuse des meilleurs ingrédients et d'un savoir-faire transmis 
+                de génération en génération.
+              </p>
+              <p>
+                Notre atelier parisien cultive l'excellence, créant des expériences 
+                sensorielles uniques pour une clientèle exigeante.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="space-y-12">
+            {principles.map((principle, index) => (
+              <motion.div
+                key={index}
+                className="principle-item minimal-border pt-8"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+                transition={{ delay: index * 0.1 }}
               >
-                <span className="gradient-text">Crafting</span>{" "}
-                <span className="text-foreground">Experiences</span>
-              </motion.h2>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Welcome to Mixology, where passion meets precision in every pour. 
-                Our journey began with a simple belief: that cocktails are more than 
-                just drinks – they&apos;re stories in a glass, moments to be savored, 
-                and memories waiting to be made.
-              </p>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                With over a decade of experience and a commitment to innovation, 
-                we&apos;ve curated a collection that celebrates both timeless classics 
-                and bold new creations. Each recipe is crafted with care, using 
-                only the finest ingredients and techniques.
-              </p>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-full liquid-gradient text-white font-semibold text-lg shadow-lg hover:shadow-xl transition-shadow"
-              >
-                Our Story
-              </motion.button>
-            </div>
-          </ParallaxWrapper>
-
-          <div className="grid grid-cols-2 gap-6">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                whileHover={{ scale: 1.05, rotate: 5 }}
-                className="stat-item"
-              >
-                <div className="glass p-8 rounded-2xl text-center transform transition-all duration-300 hover:shadow-2xl">
-                  <ParallaxWrapper speed={0.1 * (index + 1)}>
-                    <div className="inline-flex p-4 rounded-full liquid-gradient mb-4">
-                      <stat.icon className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-3xl font-bold mb-2">{stat.value}</h3>
-                    <p className="text-muted-foreground">{stat.label}</p>
-                  </ParallaxWrapper>
+                <div className="flex items-start gap-8">
+                  <div className="aristocrat-subtext w-12">
+                    {principle.number}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-light text-aristocrat-white serif mb-3">
+                      {principle.title}
+                    </h3>
+                    <p className="aristocrat-text font-extralight sans">
+                      {principle.description}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             ))}
