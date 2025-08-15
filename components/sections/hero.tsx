@@ -45,6 +45,15 @@ export function Hero() {
           stagger: 0.2,
         })
 
+        // Separate animation for the tagline to avoid conflicts
+        gsap.from(".hero-tagline", {
+          y: 20,
+          opacity: 0,
+          duration: 1.2,
+          delay: 0.1,
+          ease: "power4.out",
+        })
+
         // More performant ScrollTrigger with direct transforms
         ScrollTrigger.create({
           trigger: heroRef.current,
@@ -80,16 +89,11 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-aristocrat-void/30 via-transparent to-aristocrat-void/50" />
 
       <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="mb-16 hero-cta"
-        >
+        <div className="mb-16 hero-tagline">
           <p className="aristocrat-subtext text-center">
             <time dateTime="1924">Est. MCMXXIV</time> — {seoContent.hero.tagline}
           </p>
-        </motion.div>
+        </div>
 
         <h1
           ref={titleRef}
