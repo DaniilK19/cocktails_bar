@@ -1,124 +1,46 @@
 # 🍸 Maison Cocktail
 
-<div align="center">
-  <img src="public/images/optimized/hero.webp" alt="Maison Cocktail - Elegant cocktail bar landing page" width="800" style="border-radius: 12px; margin-bottom: 20px;" />
+Elegant landing page for a premium Parisian cocktail bar  
 
-  **Elegant landing page for a premium Parisian cocktail bar**
+<div align="center">
+  <img src="public/images/optimized/hero.webp" alt="Maison Cocktail Preview" width="800" style="border-radius: 14px;" />
   
-  *Modern web design with French luxury and high performance*
-
-  [🚀 Live Demo](https://maisoncocktail.vercel.app) · [💼 Portfolio](#features)
+  [🚀 Live Demo](https://maisoncocktail.vercel.app) · [⭐ Star on GitHub](https://github.com/DaniilK19/cocktails_bar)
 </div>
-
-## ✨ Project Features
-
-### 🎨 **Elegant Design**
-- **French Luxury** - Sophisticated design inspired by Parisian sophistication
-- **Responsive Layout** - Perfect experience on all devices  
-- **Smooth Animations** - Modern transitions and scroll effects
-- **Interactive Gallery** - Beautiful cocktail showcase with 3D effects
-- **Premium Typography** - Carefully selected fonts for luxury feel
-
-### ⚡ **High Performance**
-- **Fast Loading** - Optimized WebP images (-95% size reduction)
-- **Smart Architecture** - Code loads only when needed
-- **Perfect Metrics** - Core Web Vitals at maximum scores
-- **SEO Optimized** - Top search engine rankings
-- **Lightweight** - Only 202kB JavaScript bundle
-
-### 🎯 **Business Solution**
-- **Conversion Design** - Every element works for results
-- **Mobile First** - 60%+ traffic comes from mobile
-- **Quick Contact** - Easy ways to reach the bar
-- **Social Media** - Instagram and Facebook integration
-- **Analytics** - Track all visitor interactions
-
-## 🛠️ Technologies
-
-<div align="center">
-
-**Next.js** · **TypeScript** · **Tailwind CSS** · **Framer Motion** · **GSAP**
-
-*Modern stack for creating fast and beautiful landing pages*
-
-</div>
-
-## 📱 Key Sections
-
-### 🏠 Hero Section
-Elegant landing with parallax effects and call-to-action buttons
-
-### 🍸 Cocktail Gallery  
-Interactive showcase with animated cards and detailed descriptions
-
-### 📖 About Section
-Bar's story with beautiful animations and photography
-
-### 📞 Contact Section
-Easy contact methods: phone, email, contact form
-
-### ❓ FAQ Section
-Popular questions with quick search functionality
-
-## 📊 Performance Results
-
-<div align="center">
-
-### 🚀 Lighthouse Scores
-![Performance](https://img.shields.io/badge/Performance-100-brightgreen?style=for-the-badge)
-![SEO](https://img.shields.io/badge/SEO-100-brightgreen?style=for-the-badge)
-![Accessibility](https://img.shields.io/badge/Accessibility-100-brightgreen?style=for-the-badge)
-![Best Practices](https://img.shields.io/badge/Best_Practices-100-brightgreen?style=for-the-badge)
-
-### ⚡ Key Metrics
-- **Load Time**: < 1s
-- **Bundle Size**: 202kB
-- **Image Optimization**: -95% size
-- **Mobile Performance**: Perfect
-
-</div>
-
-## 🎨 Design Highlights
-
-### Color Scheme
-The design uses a sophisticated **"Aristocrat"** palette:
-- **Deep blacks** for premium backgrounds
-- **Cream gold** for luxury accents  
-- **Clean whites** for readability
-- **Subtle grays** for elegant details
-
-### Typography
-- **Elegant serifs** for headlines
-- **Clean sans-serif** for content
-- **Light font weights** for sophistication
-- **Perfect hierarchy** throughout
-
-## 🚀 Perfect For
-
-### 🍸 **Restaurants & Bars**
-- Cocktail bars and lounges
-- Fine dining establishments  
-- Wine bars and breweries
-- Event venues
-
-### 🏢 **Business Types**
-- Luxury service providers
-- Premium product showcases
-- Portfolio websites
-- Agency landing pages
-
-### 🎯 **Key Benefits**
-- **Increase reservations** with clear CTAs
-- **Showcase products** with beautiful galleries
-- **Build trust** with professional design
-- **Improve SEO** for local searches
 
 ---
 
 <div align="center">
-  <p><strong>🍸 Crafted with attention to detail for premium businesses</strong></p>
-  
-  **Ready to create your own stunning landing page?**
-  
-  [⭐ Star this project](https://github.com/username/cocktail-landing) • [🚀 View Demo](https://maisoncocktail.vercel.app)
+
+### 🛠️ Tech Stack  
+
+<p>
+  <img src="https://img.shields.io/badge/Next.js-15.4.5-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js 15.4.5" />
+  <img src="https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript 5.0" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3.4.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS 3.4.4" />
+</p>
+<p>
+  <img src="https://img.shields.io/badge/Framer_Motion-12.23-0055FF?style=for-the-badge&logo=framer&logoColor=white" alt="Framer Motion 12.23" />
+  <img src="https://img.shields.io/badge/GSAP-3.13-88CE02?style=for-the-badge&logo=greensock&logoColor=white" alt="GSAP 3.13" />
+  <img src="https://img.shields.io/badge/Vercel-Latest-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+</p>
+
+</div>
+
+---
+
+## ✨ Features
+- 🎨 Elegant Parisian-inspired design  
+- 📱 Responsive & mobile-first  
+- ⚡ Optimized images & fast loading  
+- 🎬 Smooth animations & interactive gallery  
+- 🔍 SEO-friendly & perfect Lighthouse scores  
+
+---
+
+<div align="center">
+
+💎 *Crafted with attention to detail*  
+🍸 *Designed for premium experiences*  
+
 </div>
