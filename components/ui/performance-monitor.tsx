@@ -22,7 +22,7 @@ export function PerformanceMonitor() {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    let realMetrics: Partial<PerformanceMetrics> = {}
+    const realMetrics: Partial<PerformanceMetrics> = {}
 
     // Get real Core Web Vitals if available
     if (typeof window !== 'undefined' && 'PerformanceObserver' in window) {
@@ -65,7 +65,7 @@ export function PerformanceMonitor() {
         const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming
         if (navigation) {
           realMetrics.ttfb = navigation.responseStart - navigation.requestStart
-          realMetrics.fid = navigation.domInteractive - navigation.domLoading
+          realMetrics.fid = navigation.domInteractive - navigation.fetchStart
         }
 
       } catch {
