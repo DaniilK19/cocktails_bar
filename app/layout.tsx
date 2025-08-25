@@ -72,11 +72,17 @@ export default function RootLayout({
       <head>
         <StructuredData />
         <SearchConsole verificationCode={analyticsConfig.google.verificationCode} />
-        {/* Preload critical resources for Core Web Vitals */}
-        <link rel="preload" href="/images/optimized/hero.webp" as="image" type="image/webp" />
+        {/* Enhanced performance optimizations */}
+        <link rel="preload" href="/images/optimized/hero.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preload" href="/images/optimized/1.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/images/optimized/2.webp" as="image" type="image/webp" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="//maisoncocktail.fr" />
+        <link rel="modulepreload" href="/_next/static/chunks/main.js" />
+        <link rel="prefetch" href="/api/cocktails" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

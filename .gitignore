@@ -136,3 +136,31 @@ robots_test.txt
 # Sitemap cache (if generated dynamically)
 public/sitemap-*.xml
 public/sitemap.xml.gz
+
+# Performance monitoring and optimization
+.performance/
+*.perf
+performance-*.json
+
+# Streaming and experimental features
+*.streaming
+*.experimental
+
+# API development files
+api-test.http
+*.rest
+
+# Component testing and storybook
+storybook-static/
+.storybook/temp/
+
+# TypeScript cache
+.tscache/
+
+# Next.js bundle analysis
+.next/analyze/
+bundle-analyzer-report.html
+
+# Claude Code workspace files
+.claude/
+claude-*.json

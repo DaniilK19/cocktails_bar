@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/hero"
 import { FAQ } from "@/components/sections/faq"
+import { PerformanceMonitor } from "@/components/ui/performance-monitor"
 import dynamic from "next/dynamic"
 
 // Lazy load heavy components for better initial performance
@@ -28,6 +29,7 @@ const About = dynamic(
 export default function Home() {
   return (
     <main className="relative">
+      {process.env.NODE_ENV === 'development' && <PerformanceMonitor />}
       <section id="home">
         <Hero />
       </section>

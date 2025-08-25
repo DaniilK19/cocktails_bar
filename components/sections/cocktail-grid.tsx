@@ -200,33 +200,37 @@ export function CocktailGrid() {
             <div className="flex items-center gap-12">
               <button
                 onClick={handlePrevSlide}
-                className="p-4 border border-aristocrat-charcoal/20 hover:border-aristocrat-cream/40 text-aristocrat-gray hover:text-aristocrat-white transition-all duration-300 rounded-full"
+                className="p-4 border border-aristocrat-charcoal/20 hover:border-aristocrat-cream/40 text-aristocrat-gray hover:text-aristocrat-white transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-aristocrat-cream focus:ring-offset-2 focus:ring-offset-aristocrat-void"
+                aria-label="Cocktail précédent"
                 title="Précédent"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-6 h-6" aria-hidden="true" />
               </button>
               
               {/* Progress Dots */}
               <div className="flex items-center gap-3">
-                {cocktails.map((_, index) => (
+                {cocktails.map((cocktail, index) => (
                   <button
                     key={index}
                     onClick={() => handleGoToSlide(index)}
-                    className={`transition-all duration-300 ${
+                    className={`transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-aristocrat-cream focus:ring-offset-2 focus:ring-offset-aristocrat-void ${
                       index === activeIndex 
                         ? 'w-3 h-3 bg-aristocrat-cream rounded-full' 
                         : 'w-2 h-2 bg-aristocrat-charcoal hover:bg-aristocrat-gray rounded-full'
                     }`}
+                    aria-label={`Aller au cocktail ${cocktail.name}`}
+                    aria-current={index === activeIndex ? 'true' : 'false'}
                   />
                 ))}
               </div>
               
               <button
                 onClick={handleNextSlide}
-                className="p-4 border border-aristocrat-charcoal/20 hover:border-aristocrat-cream/40 text-aristocrat-gray hover:text-aristocrat-white transition-all duration-300 rounded-full"
+                className="p-4 border border-aristocrat-charcoal/20 hover:border-aristocrat-cream/40 text-aristocrat-gray hover:text-aristocrat-white transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-aristocrat-cream focus:ring-offset-2 focus:ring-offset-aristocrat-void"
+                aria-label="Cocktail suivant"
                 title="Suivant"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-6 h-6" aria-hidden="true" />
               </button>
             </div>
             
