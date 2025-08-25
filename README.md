@@ -5,7 +5,6 @@ Elegant landing page for a premium Parisian cocktail bar
 <div align="center">
   <img src="public/images/optimized/hero.webp" alt="Maison Cocktail Preview" width="800" style="border-radius: 14px;" />
   
-  <br/><br/>
   [🚀 Live Demo](https://maisoncocktail.vercel.app) · [⭐ Star on GitHub](https://github.com/DaniilK19/cocktails_bar)
 </div>
 
