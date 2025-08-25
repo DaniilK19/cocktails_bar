@@ -6,21 +6,15 @@ Elegant landing page for a premium Parisian cocktail bar.
   <img src="public/images/optimized/hero.webp" alt="Maison Cocktail Preview" width="800" style="border-radius: 12px;" />
   
   [🚀 Live Demo](https://maisoncocktail.vercel.app) · [⭐ Star on GitHub](https://github.com/DaniilK19/cocktails_bar)
-</div>
-
----
 
 <div align="center">
-
-### 🛠️ Tech Stack  
-
-![Next.js](https://img.shields.io/badge/Next.js-black?logo=next.js&logoColor=white&style=for-the-badge)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white&style=for-the-badge)
-![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white&style=for-the-badge)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?logo=framer&logoColor=white&style=for-the-badge)
-![Vercel](https://img.shields.io/badge/Hosted_on-Vercel-black?logo=vercel&logoColor=white&style=for-the-badge)
-
-</div>
+    <img src="https://img.shields.io/badge/Next.js-15.4.5-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js 15.4.5" />
+    <img src="https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript 5.0" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-3.4.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS 3.4.4" />
+    <img src="https://img.shields.io/badge/Framer_Motion-12.23-0055FF?style=for-the-badge&logo=framer&logoColor=white" alt="Framer Motion 12.23" />
+    <img src="https://img.shields.io/badge/GSAP-3.13-88CE02?style=for-the-badge&logo=greensock&logoColor=white" alt="GSAP 3.13" />
+    <img src="https://img.shields.io/badge/Vercel-Latest-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" />
+  </div>
 
 ---
 
