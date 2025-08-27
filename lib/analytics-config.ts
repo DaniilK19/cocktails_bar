@@ -1,8 +1,8 @@
 // Analytics configuration for Maison Cocktail
 export const analyticsConfig = {
   google: {
-    measurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX',
-    verificationCode: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || 'your-verification-code-here'
+    measurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '',
+    verificationCode: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || ''
   },
   
   // SEO monitoring settings

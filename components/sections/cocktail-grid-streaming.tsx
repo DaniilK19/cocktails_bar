@@ -33,9 +33,6 @@ function FirstBatch() {
 
 // Stream remaining cocktails
 async function RemainingBatch() {
-  // Simulate data fetching delay
-  await new Promise(resolve => setTimeout(resolve, 100))
-  
   return (
     <>
       {cocktails.slice(3).map((cocktail, index) => (
