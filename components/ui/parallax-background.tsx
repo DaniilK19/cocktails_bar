@@ -116,8 +116,10 @@ export function ParallaxBackground({
         ref={parallaxRef}
         className="absolute inset-0 w-full h-[140%] -top-[20%]"
         style={{
-          opacity,
-          filter: `blur(${blur}px)`,
+          opacity: Number(opacity),
+          filter: `blur(${Number(blur)}px)`,
+          willChange: 'transform',
+          backfaceVisibility: 'hidden',
         }}
       >
         <OptimizedImage

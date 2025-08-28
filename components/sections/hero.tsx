@@ -4,7 +4,17 @@ import { useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 // Lazy load GSAP to reduce initial bundle size
 const loadGSAP = () => import("@/lib/gsap").then(mod => ({ gsap: mod.gsap, ScrollTrigger: mod.ScrollTrigger }))
-import { ParallaxBackground } from "@/components/ui/parallax-background"
+import { ParallaxBackgroundStable } from "@/components/ui/parallax-background-stable"
+import { ClientOnly } from "@/components/ui/client-only"
+import dynamic from "next/dynamic"
+
+const ParallaxBackground = dynamic(
+  () => import("@/components/ui/parallax-background").then(mod => mod.ParallaxBackground),
+  { 
+    ssr: false,
+    loading: () => <ParallaxBackgroundStable imageSrc="/images/optimized/hero.webp" />
+  }
+)
 import { ChevronDown } from "lucide-react"
 import { seoContent } from "@/data/seo-content"
 import { useAnalytics } from "@/components/analytics/google-analytics"
@@ -78,12 +88,14 @@ export function Hero() {
       ref={heroRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <ParallaxBackground 
-        imageSrc="/images/optimized/hero.webp" 
-        speed={0.3} 
-        opacity={0.45} 
-        blur={0.2} 
-      />
+      <ClientOnly fallback={<ParallaxBackgroundStable imageSrc="/images/optimized/hero.webp" />}>
+        <ParallaxBackground 
+          imageSrc="/images/optimized/hero.webp" 
+          speed={0.3} 
+          opacity={0.45} 
+          blur={0.2} 
+        />
+      </ClientOnly>
       
 
       <div className="absolute inset-0 bg-gradient-to-b from-aristocrat-void/30 via-transparent to-aristocrat-void/50" />
