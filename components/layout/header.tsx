@@ -109,10 +109,10 @@ export function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 120 }}
-              className="absolute right-0 top-0 h-full w-80 bg-aristocrat-void/95 backdrop-blur-sm p-8 pt-24 minimal-border"
+              className="absolute right-0 top-0 h-full w-72 bg-aristocrat-void/95 backdrop-blur-sm p-6 pt-20 minimal-border"
               aria-label="Navigation mobile"
             >
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {navItems.map((item, index) => (
                   <motion.a
                     key={item.name}
@@ -121,7 +121,7 @@ export function Header() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 + 0.2 }}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block aristocrat-link text-lg py-2"
+                    className="block aristocrat-link text-base py-2"
                     title={`Aller à la section ${item.name}`}
                   >
                     {item.name}
@@ -132,7 +132,7 @@ export function Header() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="aristocrat-button px-6 py-4 mt-12 block text-center"
+                  className="aristocrat-button px-6 py-3 mt-8 block text-center text-sm"
                   onClick={() => setIsMobileMenuOpen(false)}
                   title="Réserver une table ou une dégustation"
                 >
